@@ -9,9 +9,16 @@ function Display(){
     
     // metodo clear() para limpiar el display
     this.clear = ()=>{
-        this.show('---------')
+        this.show('')
     }
 }
 
 // instanciacion de display
 let display = new Display()
+
+// instanciacion de display auxiliar
+// con su funcion show() personalizada
+let aux_display = new Display()
+aux_display.show = (show)=>{
+    ref_aux_display.innerHTML = show
+}

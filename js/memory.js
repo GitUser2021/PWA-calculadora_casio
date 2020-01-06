@@ -54,6 +54,7 @@ function controlOperations(dynamicMemory, value) {
     switch (value) {
         case 'c':
             console.log('c')
+            aux_display.clear() // limpio el display auxiliar
             display.show(0)
             btn_sumar.status = true // habilito el boton 
             btn_restar.status = true // habilito el boton 
@@ -63,6 +64,7 @@ function controlOperations(dynamicMemory, value) {
             break;
         case 'allClear':
             console.log('allClear')
+            aux_display.clear() // limpio el display auxiliar
             memory.reset(); display.show(0) // si se presiono el boton ac se resetea la memoria, valores y estados vuelven al estado original.
             btn_dot.status = true // habilito el boton 
             break;
@@ -77,6 +79,7 @@ function controlOperations(dynamicMemory, value) {
             break
         case '+':
             console.log('+')
+            aux_display.show('+') // muestra en el display auxiliar el operador
             btn_dot.status = true // habilito el boton 
             memory.status_a = false // invierte los status para cambiar de memoria
             memory.status_b = true
@@ -85,6 +88,7 @@ function controlOperations(dynamicMemory, value) {
             break
         case '-':
             console.log('-')
+            aux_display.show('-') // muestra en el display auxiliar el operador
             btn_dot.status = true // habilito el boton 
             memory.status_a = false // invierte los status para cambiar de memoria
             memory.status_b = true
@@ -93,12 +97,15 @@ function controlOperations(dynamicMemory, value) {
             break
         case '=':
             console.log('=')
+            aux_display.show('=') // muestra en el display auxiliar el operador
             if (memory.value_a != '') { // para evitar que al presionar el igual(=) cuando hay un cero(0) la pantalla muestre '' que es el valor x defecto de memory.value_a
                 memory.status_a = true    // status a la normalidad
                 memory.status_b = false
                 memory.value_b = parseFloat(memory.value_b) // paso a numero el valor final de memory_b
                 resolve()
-                display.show(memory.value_a)
+                if (!isNaN(memory.value_a)) { // solo se muestra el valor en el display si el mismo no es Nan
+                    display.show(memory.value_a)
+                }
                 memory.value_a = String(memory.value_a) // lo vuelvo a pasar a string para empezar el ciclo de nuevo y poder concatenar.
                 memory.value_b = '' // borro la memory_value_b
                 memory.operation = '' // borro el operador para evitar usar el '=' dos veces seguidas
@@ -106,6 +113,7 @@ function controlOperations(dynamicMemory, value) {
             break
         case '*':
             console.log('*')
+            aux_display.show('*') // muestra en el display auxiliar el operador
             btn_dot.status = true // habilito el boton 
             memory.status_a = false // invierte los status para cambiar de memoria
             memory.status_b = true
@@ -114,6 +122,7 @@ function controlOperations(dynamicMemory, value) {
             break
         case '/':
             console.log('/')
+            aux_display.show('/') // muestra en el display auxiliar el operador
             btn_dot.status = true // habilito el boton 
             memory.status_a = false // invierte los status para cambiar de memoria
             memory.status_b = true

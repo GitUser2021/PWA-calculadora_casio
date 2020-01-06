@@ -99,17 +99,16 @@
     line-height: calc(38vw * var(--porcentaje));
     font-size: calc(15vw * var(--porcentaje));
 }
-/* #aux_display{
-    border: 1px solid green;
-    font-size: 25px;
-    width: 218px;
-    height: 42px;
+#aux_display{
+    font-size: calc(14vw * var(--porcentaje));
+    width: calc(30vw * var(--porcentaje));
+    height: calc(15vw * var(--porcentaje));
     position: absolute;
-    top: 95px;
-    left: 45px;
+    top: calc(30vw * var(--porcentaje));
+    left: calc(52vw * var(--porcentaje));
     text-align: right;
-    line-height: 25px;
-} */
+    line-height: calc(15vw * var(--porcentaje));
+}
 
 #error{
     position: absolute;
