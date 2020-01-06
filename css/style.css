@@ -1,103 +1,103 @@
-:root{--x:1.5 }
+:root{
+    --porcentaje: 1;
+}
 
 #casio{
-    width: 100vw; /*30vw*/
+    width: calc(100vw * var(--porcentaje));  
     position: absolute;
     top: 0vw;
     left: 0vw;
 }
 
 .btn{
-    width: 20vw; /*4*/
+    width: calc(20vw * var(--porcentaje));
 }
 
 /* linea 0 */
 #btn_0,#btn_dot,#btn_igual,#btn_sumar{
-    top: calc(136vw); /*18.9*/
+    top: calc(136vw * var(--porcentaje));
 }
 #btn_0,#btn_1,#btn_4,#btn_7,#btn_memory_record{
     position: absolute;
-    left: calc(7vw); /*1.5*/
+    left: calc(7vw * var(--porcentaje));
 }
 #btn_dot,#btn_2,#btn_5,#btn_8,#btn_memory_sumar{
     position: absolute;
-    left: calc(29vw); /*5.8*/
+    left: calc(29vw * var(--porcentaje));
 }
 #btn_igual,#btn_3,#btn_6,#btn_9,#btn_memory_restar{
     position: absolute;
-    left: calc(51vw); /*10.3*/
+    left: calc(51vw * var(--porcentaje));
 }
 #btn_sumar,#btn_restar,#btn_multiplicar,#btn_dividir,#btn_porcentaje{
     position: absolute;
-    left: calc(72vw); /*14.6*/
+    left: calc(72vw * var(--porcentaje));
 }
 /* fin linea 0 */
 
 
 /* linea 1 */
 #btn_1,#btn_2,#btn_3,#btn_restar{
-    top: calc(122vw); /*24.3*/
+    top: calc(122vw * var(--porcentaje));
 }
 /* fin linea 1 */
 
 
 /* linea 4 */
 #btn_4,#btn_5,#btn_6,#btn_multiplicar{
-    top: calc(108vw);  /*21.6*/
+    top: calc(108vw * var(--porcentaje));
 }
 /* fin linea 4 */
 
 
 /* linea 7*/
 #btn_7,#btn_8,#btn_9,#btn_dividir{
-    top: calc(95vw); /*18.9*/
+    top: calc(95vw * var(--porcentaje));
 }
 /* fin linea 7*/
 
+
 /* linea memoria*/
 #btn_memory_record,#btn_memory_sumar,#btn_memory_restar,#btn_porcentaje{
-    top: calc(81vw); /*18.9*/
+    top: calc(81vw * var(--porcentaje));
 }
 /* fin linea memoria*/
 
+
 /* linea funciones*/
 #btn_ac,#btn_c,#btn_signo,#btn_raiz,#btn_off{
-    top: calc(68vw);
     position: absolute;
+    top: calc(68vw * var(--porcentaje));
+    width: calc(16vw * var(--porcentaje));
 }
 #btn_ac{
-    left: calc(8vw);
-    width: calc(20vw * 0.8); /*18*/
+    left: calc(8vw * var(--porcentaje));
 }
 #btn_c{
-    left: calc(25vw); /*5.8*/
-    width: calc(20vw * 0.8); /*18*/
+    left: calc(25vw * var(--porcentaje));
 }
 #btn_signo{
-    left: calc(42vw); /*10.3*/
-    width: calc(20vw * 0.8); /*18*/
+    left: calc(42vw * var(--porcentaje));
 }
 #btn_raiz{
-    left: calc(59vw);
-    width: calc(20vw * 0.8); /*18*/
+    left: calc(59vw * var(--porcentaje));
 }
 #btn_off{
-    left: calc(76vw);
-    width: calc(20vw * 0.8); /*18*/
+    left: calc(76vw * var(--porcentaje));
 }
 /* fin linea funciones*/
 
 
 #main_display{
     border: 1px solid red;
-    width: calc(20vw * 3.3333333333); /*20*/
-    height: calc(7.5vw * 3.3333333333); /*7.5*/
+    width: calc(67vw * var(--porcentaje)); 
+    height: calc(25vw * var(--porcentaje));
     position: absolute;
-    top: calc(9.5vw * 3.3333333333); /*9.5*/
-    left: calc(5vw * 3.3333333333); /*5*/
+    top: calc(31vw * var(--porcentaje));
+    left: calc(16vw * var(--porcentaje));
     text-align: right;
-    line-height: calc(11vw * 3.3333333333); /*11*/
-    font-size: calc(5vw * 3.3333333333); /*5*/
+    line-height: calc(38vw * var(--porcentaje));
+    font-size: calc(15vw * var(--porcentaje));
 }
 /* #aux_display{
     border: 1px solid green;
@@ -112,33 +112,11 @@
 } */
 
 #error{
-position: absolute;
-top: calc(0.5vw * 3.3333333333);
-left: calc(0vw * 3.3333333333);
-text-align: center;
-line-height: calc(3vw * 3.3333333333);
-    font-size: calc(3vw * 3.3333333333);
+    position: absolute;
+    top: calc(3vw * var(--porcentaje));
+    left: calc(0vw * var(--porcentaje));
+    text-align: center;
+    line-height: calc(10vw * var(--porcentaje));
+    font-size: calc(10vw * var(--porcentaje));
     border: 1px solid green;
 } 
-
-/* 
-@media (min-width:1440px){
-    :root{--x:1.5 * 3.3333333333}
-    #casio{
-        width: 100vw;  
-    }
-}
-
-@media (max-width:1360px){
-    :root{--x:1.5}
-    #casio{
-        width: 30vw; 
-    }
-}
-
-@media (min-width:380px){
-    :root{--x:1.5 * 3.3333333333}
-    #casio{
-        width: 100vw; 
-    }
-} */
