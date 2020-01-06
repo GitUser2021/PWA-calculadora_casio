@@ -1,0 +1,144 @@
+:root{--x:1.5 }
+
+#casio{
+    width: 100vw; /*30vw*/
+    position: absolute;
+    top: 0vw;
+    left: 0vw;
+}
+
+.btn{
+    width: 20vw; /*4*/
+}
+
+/* linea 0 */
+#btn_0,#btn_dot,#btn_igual,#btn_sumar{
+    top: calc(136vw); /*18.9*/
+}
+#btn_0,#btn_1,#btn_4,#btn_7,#btn_memory_record{
+    position: absolute;
+    left: calc(7vw); /*1.5*/
+}
+#btn_dot,#btn_2,#btn_5,#btn_8,#btn_memory_sumar{
+    position: absolute;
+    left: calc(29vw); /*5.8*/
+}
+#btn_igual,#btn_3,#btn_6,#btn_9,#btn_memory_restar{
+    position: absolute;
+    left: calc(51vw); /*10.3*/
+}
+#btn_sumar,#btn_restar,#btn_multiplicar,#btn_dividir,#btn_porcentaje{
+    position: absolute;
+    left: calc(72vw); /*14.6*/
+}
+/* fin linea 0 */
+
+
+/* linea 1 */
+#btn_1,#btn_2,#btn_3,#btn_restar{
+    top: calc(122vw); /*24.3*/
+}
+/* fin linea 1 */
+
+
+/* linea 4 */
+#btn_4,#btn_5,#btn_6,#btn_multiplicar{
+    top: calc(108vw);  /*21.6*/
+}
+/* fin linea 4 */
+
+
+/* linea 7*/
+#btn_7,#btn_8,#btn_9,#btn_dividir{
+    top: calc(95vw); /*18.9*/
+}
+/* fin linea 7*/
+
+/* linea memoria*/
+#btn_memory_record,#btn_memory_sumar,#btn_memory_restar,#btn_porcentaje{
+    top: calc(81vw); /*18.9*/
+}
+/* fin linea memoria*/
+
+/* linea funciones*/
+#btn_ac,#btn_c,#btn_signo,#btn_raiz,#btn_off{
+    top: calc(68vw);
+    position: absolute;
+}
+#btn_ac{
+    left: calc(8vw);
+    width: calc(20vw * 0.8); /*18*/
+}
+#btn_c{
+    left: calc(25vw); /*5.8*/
+    width: calc(20vw * 0.8); /*18*/
+}
+#btn_signo{
+    left: calc(42vw); /*10.3*/
+    width: calc(20vw * 0.8); /*18*/
+}
+#btn_raiz{
+    left: calc(59vw);
+    width: calc(20vw * 0.8); /*18*/
+}
+#btn_off{
+    left: calc(76vw);
+    width: calc(20vw * 0.8); /*18*/
+}
+/* fin linea funciones*/
+
+
+#main_display{
+    border: 1px solid red;
+    width: calc(20vw * 3.3333333333); /*20*/
+    height: calc(7.5vw * 3.3333333333); /*7.5*/
+    position: absolute;
+    top: calc(9.5vw * 3.3333333333); /*9.5*/
+    left: calc(5vw * 3.3333333333); /*5*/
+    text-align: right;
+    line-height: calc(11vw * 3.3333333333); /*11*/
+    font-size: calc(5vw * 3.3333333333); /*5*/
+}
+/* #aux_display{
+    border: 1px solid green;
+    font-size: 25px;
+    width: 218px;
+    height: 42px;
+    position: absolute;
+    top: 95px;
+    left: 45px;
+    text-align: right;
+    line-height: 25px;
+} */
+
+#error{
+position: absolute;
+top: calc(0.5vw * 3.3333333333);
+left: calc(0vw * 3.3333333333);
+text-align: center;
+line-height: calc(3vw * 3.3333333333);
+    font-size: calc(3vw * 3.3333333333);
+    border: 1px solid green;
+} 
+
+/* 
+@media (min-width:1440px){
+    :root{--x:1.5 * 3.3333333333}
+    #casio{
+        width: 100vw;  
+    }
+}
+
+@media (max-width:1360px){
+    :root{--x:1.5}
+    #casio{
+        width: 30vw; 
+    }
+}
+
+@media (min-width:380px){
+    :root{--x:1.5 * 3.3333333333}
+    #casio{
+        width: 100vw; 
+    }
+} */
