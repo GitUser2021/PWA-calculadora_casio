@@ -78,6 +78,10 @@ function controlOperations(dynamicMemory, value) {
         case '.':
             console.log('.')
             btn_dot.status = false // deshabilito el boton para que no se pueda repetir los '.'
+            // luego de una operacion donde se presiono el igual,
+            // si se ingresa el punto primero se resetea la memoria para comenzar con la memoria vacia.
+            // por el contrario si se toca un operador (+ , - , * , /, etc) la memoria no se resetea y se continua con el valor anterior para seguir operando.
+            if (memory.operation == '=') { memory.reset() }
             if (memory[dynamicMemory] == 0) {
                 value = '0.'
             }
