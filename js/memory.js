@@ -98,6 +98,10 @@ function controlOperations(dynamicMemory, value) {
         case '=':
             console.log('=')
             aux_display.show('=') // muestra en el display auxiliar el operador
+            btn_sumar.status = true // habilito el boton 
+            btn_restar.status = true // habilito el boton 
+            btn_multiplicar.status = true // habilito el boton 
+            btn_dividir.status = true // habilito el boton 
             if (memory.value_a != '') { // para evitar que al presionar el igual(=) cuando hay un cero(0) la pantalla muestre '' que es el valor x defecto de memory.value_a
                 memory.status_a = true    // status a la normalidad
                 memory.status_b = false
@@ -106,7 +110,8 @@ function controlOperations(dynamicMemory, value) {
                 if (!isNaN(memory.value_a)) { // solo se muestra el valor en el display si el mismo no es Nan
                     display.show(memory.value_a)
                 }
-                memory.value_a = String(memory.value_a) // lo vuelvo a pasar a string para empezar el ciclo de nuevo y poder concatenar.
+                //memory.value_a = String(memory.value_a) // lo vuelvo a pasar a string para empezar el ciclo de nuevo y poder concatenar.
+                memory.value_a = '' // borro la memory_value_a
                 memory.value_b = '' // borro la memory_value_b
                 memory.operation = '' // borro el operador para evitar usar el '=' dos veces seguidas
             }
