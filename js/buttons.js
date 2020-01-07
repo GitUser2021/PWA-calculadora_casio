@@ -1,52 +1,8 @@
 //  constructor de boton 
 function Button(value) {
-    this.val = value
+    this.value = value
     this.status = true
-
-    this.value = () => { // retorna el valor del boton solo si su status es true.
-        if (this.val == '+' || this.val == '-' || this.val == '*' || this.val == '/') {
-            var newthis = this
-            buttonsToResolve(this.val, newthis)
-            return this.val
-        }
-        if (this.status) {
-            return this.val
-        } else {
-            console.log('disabled button')
-        }
-    }
 }
-// funcion que cambia el valor de todos los operadores ( '+' , '-' , '*' , '/' ) por el de '='
-// para que la segunda vez que se presiona alguno de estos , el mismo funcione como el boton '=' y muestre el resultado
-function buttonsToResolve(val, newthis) {
-    if (newthis.status) {
-        newthis.status = false
-    } else {
-        //newthis.status = true
-        send(btn_igual.value())
-
-        function params() {
-            if (memory.status_a) { dynamicMemory = 'value_a' } else { dynamicMemory = 'value_b' } // necesario para pasar el parametro a la funcion.
-            controlOperations(dynamicMemory, val)
-        }
-
-        switch (val) { // luego del igual(=) ejecuto la operacion correspondiente al operador para poder continuar con el ciclo.
-            case '+':
-                params()
-                break;
-            case '-':
-                params()
-                break;
-            case '*':
-                params()
-                break;
-            case '/':
-                params()
-                break;
-        }
-    }
-}
-
 
 // instanciacion de botones numericos
 let btn_0 = new Button(0)
