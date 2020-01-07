@@ -31,7 +31,8 @@ ref_btn_9.addEventListener('click', () => {
 })
 
 ref_btn_dot.addEventListener('click', () => {
-    if(btn_dot.status){
+    if (btn_dot.status) {
+        console.log('.')
         send(btn_dot.value)
     }
 })

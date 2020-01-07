@@ -1,23 +1,23 @@
 // constructor de memoria
 function Memory() {
-    this.value_a = '' // valor memoria a
-    this.value_b = '' // valor memoria b
+    this.value_a = 0 // valor memoria a
+    this.value_b = 0 // valor memoria b
 
     this.status_a = true // indica si la memoria esta activa
     this.status_b = false // indica si la memoria esta activa
 
     this.operation = '' // indica el valor de la operacion (suma,resta,etc)
     this.reset = () => { // reseta la memoria a su estado original
-        this.value_a = ''
-        this.value_b = ''
+        this.value_a = 0
+        this.value_b = 0
         this.operation = ''
         this.status_a = true
         this.status_b = false
     }
     this.clear = () => { // limpia la memoria activa unicamente, si la memoria activa es la "a" directamente se hace un reset
-        if (this.value_a != '' && this.value_b != '') {
-            this.value_b = ''
-        } else if (this.value_a != '' && this.value_b == '') {
+        if (this.value_a != 0 && this.value_b != 0) {
+            this.value_b = 0
+        } else if (this.value_a != 0 && this.value_b == 0) {
             this.reset()
         }
     }
@@ -34,10 +34,10 @@ function controlNumbers(value) {
     if (memory.operation == '=') { memory.reset() }
     if (memory.status_a) { // determino cual memoria esta activa para utilizar , por defecto la primera es la memory_a
         // aca controlo la memory_a(value)
-        control_memory(Object.keys(memory)[0], value)
+        control_memory('value_a', value)
     } else {
         // aca controlo la memory_b(value)
-        control_memory(Object.keys(memory)[1], value)
+        control_memory('value_b', value)
     }
 }
 
@@ -46,9 +46,15 @@ function control_memory(dynamicMemory, value) {
     // maximo los numeros indicados en la constante MAX_NUMBERS, sino error
     // agrego la funcion String() para que no de error al hacer el length a un valor numerico
     if (String(memory[dynamicMemory]).length < MAX_NUMBERS) {
-        if (typeof (value) === 'number') {
-            if (memory[dynamicMemory] === 0) { memory[dynamicMemory] = '' } // para evitar que se concatenen numeros al 0 ej: 02 , 05 etc 
-            memory[dynamicMemory] += String(value) // pasar a string para que se concatenen los numeros
+        if (typeof (value) === 'number' || value == '.') {
+            if (memory[dynamicMemory] === 0 && typeof (value) === 'number') {  // para evitar que se concatenen numeros al 0 ej: 000, 02 , 05 etc 
+                memory[dynamicMemory] = ''
+            } else { btn_dot.status = false } // desactivo el boton punto
+            if (value === 0 && memory[dynamicMemory] == '') {
+                memory[dynamicMemory] = parseFloat(memory[dynamicMemory] + value)
+            } else {
+                memory[dynamicMemory] += String(value) // pasar a string para que se concatenen los numeros
+            }
             display.show(memory[dynamicMemory])
         } else {
             controlOperactions(dynamicMemory, value) // funcion para los operadores
@@ -75,20 +81,6 @@ function controlOperations(dynamicMemory, value) {
             memory.reset(); display.show(0) // si se presiono el boton ac se resetea la memoria, valores y estados vuelven al estado original.
             btn_dot.status = true // habilito el boton 
             break;
-        case '.':
-            console.log('.')
-            btn_dot.status = false // deshabilito el boton para que no se pueda repetir los '.'
-            // luego de una operacion donde se presiono el igual,
-            // si se ingresa el punto primero se resetea la memoria para comenzar con la memoria vacia.
-            // por el contrario si se toca un operador (+ , - , * , /, etc) la memoria no se resetea y se continua con el valor anterior para seguir operando.
-            if (memory.operation == '=') { memory.reset() }
-            if (memory[dynamicMemory] == 0) {
-                value = '0.'
-            }
-            memory[dynamicMemory] += String(value) // pasar a string para que se concatenen los numeros // ****creo esta al pedo xq el "." ya es un string*******
-            display.show(memory[dynamicMemory])
-
-            break
         case '+':
             console.log('+')
             aux_display.show('+') // muestra en el display auxiliar el operador
@@ -96,13 +88,13 @@ function controlOperations(dynamicMemory, value) {
             memory.status_a = false // invierte los status para cambiar de memoria
             memory.status_b = true
             memory[dynamicMemory] = parseFloat(memory[dynamicMemory]) // paso a numero el valor final de memory_a
-            if (isNaN(memory[dynamicMemory])) { memory[dynamicMemory] = '' } // si el valor de memoria es NaN lo cambio a ''
+            if (isNaN(memory[dynamicMemory])) { memory[dynamicMemory] = 0 } // si el valor de memoria es NaN lo cambio a 0
             memory.operation = value // le paso el operador utilizado a la memoria
             resolve()
             if (!isNaN(memory.value_a)) { // solo se muestra el valor en el display si el mismo no es Nan
                 display.show(memory.value_a)
             }
-            memory.value_b = '' // borro la memory_value_b
+            memory.value_b = 0 // borro la memory_value_b
             break
         case '-':
             console.log('-')
@@ -117,13 +109,13 @@ function controlOperations(dynamicMemory, value) {
             console.log('=')
             btn_dot.status = true // habilito el boton 
             aux_display.show('=') // muestra en el display auxiliar el operador
-            if (memory.value_a != '') { // para evitar que al presionar el igual(=) cuando hay un cero(0) la pantalla muestre '' que es el valor x defecto de memory.value_a
+            if (memory.value_a != 0) { // para evitar que al presionar el igual(=) cuando hay un cero(0) la pantalla muestre 0 que es el valor x defecto de memory.value_a
                 memory.value_b = parseFloat(memory.value_b) // paso a numero el valor final de memory_b
                 resolve()
                 if (!isNaN(memory.value_a)) { // solo se muestra el valor en el display si el mismo no es Nan
                     display.show(memory.value_a)
                 }
-                memory.value_b = '' // borro la memory_value_b
+                memory.value_b = 0 // borro la memory_value_b
                 memory.operation = '=' // borro el operador para evitar usar el '=' dos veces seguidas
             }
             break
@@ -152,7 +144,7 @@ function resolve() {
     if (!isNaN(memory.value_b)) { // para que no de error si se presiona dos veces el boton igual.
         switch (memory.operation) {
             case '+':
-                if (memory.value_b == '') { memory.value_b = 0 }
+                //************if (memory.value_b == 0) { memory.value_b = 0 }
                 memory.value_a += parseFloat(memory.value_b)
                 // para evitar que al estar en display el cero y si se presiona muchas veces el operador suma
                 // se concaten los ceros ej: 0000000
