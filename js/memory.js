@@ -144,11 +144,10 @@ function resolve() {
     if (!isNaN(memory.value_b)) { // para que no de error si se presiona dos veces el boton igual.
         switch (memory.operation) {
             case '+':
-                //************if (memory.value_b == 0) { memory.value_b = 0 }
-                memory.value_a += parseFloat(memory.value_b)
-                // para evitar que al estar en display el cero y si se presiona muchas veces el operador suma
-                // se concaten los ceros ej: 0000000
-                memory.value_a = parseFloat(memory.value_a)
+                memory.value_a += memory.value_b
+                // fix al problema de los decimales ej: 0.1 + 0.2 = 0.30000000000000004
+                // depaso el valor de toFixed(x) serian la cant. max. de decimales permitidos
+                memory.value_a = parseFloat(memory.value_a.toFixed(5))
                 break
             case '-':
                 memory.value_a -= memory.value_b
