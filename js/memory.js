@@ -145,19 +145,26 @@ function resolve() {
         switch (memory.operation) {
             case '+':
                 memory.value_a += memory.value_b
-                // fix al problema de los decimales ej: 0.1 + 0.2 = 0.30000000000000004
-                // depaso el valor de toFixed(x) serian la cant. max. de decimales permitidos
-                memory.value_a = parseFloat(memory.value_a.toFixed(5))
+                fix_decimal(MAX_DECIMALES)
                 break
             case '-':
                 memory.value_a -= memory.value_b
+                fix_decimal(MAX_DECIMALES)
                 break
             case '*':
                 memory.value_a *= memory.value_b
+                fix_decimal(MAX_DECIMALES)
                 break
             case '/':
                 memory.value_a /= memory.value_b
+                fix_decimal(MAX_DECIMALES)
                 break
         }
     }
+}
+
+// fix al problema de los decimales ej: 0.1 + 0.2 = 0.30000000000000004
+// depaso el valor de toFixed(x) serian la cant. max. de decimales permitidos
+function fix_decimal(MAX_DECIMALES) {
+    memory.value_a = parseFloat(memory.value_a.toFixed(MAX_DECIMALES))
 }

@@ -30,3 +30,4 @@ let ref_aux_display = document.getElementById('aux_display')
 
 // constante maxima cantidad de numeros en pantalla
 const MAX_NUMBERS = 8
+const MAX_DECIMALES = 5
