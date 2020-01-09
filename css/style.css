@@ -2,6 +2,10 @@
     --porcentaje: 1;
 }
 
+body{
+    background: black;
+}
+
 #casio{
     width: calc(100vw * var(--porcentaje));  
     position: absolute;
@@ -100,12 +104,13 @@
     font-size: calc(15vw * var(--porcentaje));
 }
 #aux_display{
-    font-size: calc(14vw * var(--porcentaje));
-    width: calc(30vw * var(--porcentaje));
+    border: 1px solid red;
+    font-size: calc(7vw * var(--porcentaje));
+    width: calc(67vw * var(--porcentaje));
     height: calc(15vw * var(--porcentaje));
     position: absolute;
     top: calc(30vw * var(--porcentaje));
-    left: calc(52vw * var(--porcentaje));
+    left: calc(16vw * var(--porcentaje));
     text-align: right;
     line-height: calc(15vw * var(--porcentaje));
 }

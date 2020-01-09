@@ -1,4 +1,4 @@
-//  constructor de boton 
+// constructor de boton 
 function Button(value) {
     this.value = value
     this.status = true
@@ -26,5 +26,5 @@ let btn_igual = new Button('=')
 let btn_dot = new Button('.')
 
 // instanciacion de los botones de funciones
-let btn_ac = new Button('allClear')
-let btn_c = new Button('c')
+let btn_ac = new Button('AC')
+let btn_c = new Button('C')
