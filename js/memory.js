@@ -142,6 +142,14 @@ function resolve() {
         default:
             break
     }
+    // mensaje si el resultado es infinito.
+    if(memory.value_a == 'Infinity'){
+        ref_aux_display.innerHTML = ''
+        ref_display.innerHTML = '<span id = "error">Numero infinito!</span>'
+        memory.reset()
+        //aux_display.data_a = ''
+        throw Error ('Numero infinito!')
+    }
 }
 
 // fix al problema de los decimales ej: 0.1 + 0.2 = 0.30000000000000004
