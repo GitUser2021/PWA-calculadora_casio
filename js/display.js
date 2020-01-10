@@ -36,4 +36,9 @@ function render() {
         aux_display.value = aux_display.data_a + aux_display.data_b
         aux_display.show(aux_display.value)
     }
+    // para limitar la cant. de digitos en pantalla.
+    // lo ubico al final para que sobre-escriba el display luego de que se hayan
+    // renderizado todos los datos.
+    // solamente muestro los datos recortados a la cant. de MAX_NUMBERS.
+    check_max_numbers()
 }

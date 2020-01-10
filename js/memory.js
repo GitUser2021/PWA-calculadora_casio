@@ -149,3 +149,15 @@ function resolve() {
 function fix_decimal(MAX_DECIMALES) {
     memory.value_a = parseFloat(memory.value_a.toFixed(MAX_DECIMALES))
 }
+
+// para limitar la cant. de digitos en pantalla.
+function check_max_numbers() {
+    if (String(memory.value_a).length > MAX_NUMBERS) {
+        if (memory.status_a) {
+            display.show(String(memory.value_a).slice(0, MAX_NUMBERS))
+        }
+        if (memory.status_b) {
+            display.show(String(memory.value_b).slice(0, MAX_NUMBERS))
+        }
+    }
+}
