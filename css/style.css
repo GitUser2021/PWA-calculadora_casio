@@ -93,7 +93,6 @@ body{
 
 
 #main_display{
-    border: 6px solid red;
     width: calc(66.5vw * var(--porcentaje)); 
     height: calc(24.5vw * var(--porcentaje));
     position: absolute;
