@@ -93,28 +93,27 @@ body{
 
 
 #main_display{
-    border: 1px solid red;
-    width: calc(62vw * var(--porcentaje)); 
-    height: calc(25vw * var(--porcentaje));
+    border: 6px solid red;
+    width: calc(66.5vw * var(--porcentaje)); 
+    height: calc(24.5vw * var(--porcentaje));
     position: absolute;
-    top: calc(31vw * var(--porcentaje));
-    left: calc(19vw * var(--porcentaje));
+    top: calc(31.8vw * var(--porcentaje));
+    left: calc(16.5vw * var(--porcentaje));
     text-align: right;
-    padding: calc(1vw * var(--porcentaje));
-    line-height: calc(38vw * var(--porcentaje));
-    font-size: calc(15vw * var(--porcentaje));
+    line-height: calc(37vw * var(--porcentaje));
+    font-size: calc(14.5vw * var(--porcentaje));
 }
 #aux_display{
-    font-size: calc(7vw * var(--porcentaje));
+    font-size: calc(5vw * var(--porcentaje));
     width: calc(65vw * var(--porcentaje));
     height: calc(15vw * var(--porcentaje));
     position: absolute;
     top: calc(30vw * var(--porcentaje));
     left: calc(16vw * var(--porcentaje));
     text-align: right;
-    padding: calc(1vw * var(--porcentaje));
     line-height: calc(15vw * var(--porcentaje));
     overflow: hidden;
+    padding-left: calc(2vw * var(--porcentaje));;
 }
 
 #error{
