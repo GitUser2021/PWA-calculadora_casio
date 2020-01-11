@@ -32,6 +32,10 @@ let memory = new Memory
 // los numeros ingresados se van concatenando en la memory.value_a.
 // hasta que se ingresa un operador, entonces los siguientes numeros se ingresaran en la memory.value_b.
 function controlNumbers(value) { ////////////////
+    if (memory.operation == '' && controlOperations.prev_operator == '=') {
+        memory.reset()
+    }
+
     if (memory.operation == '') {
         if (memory.value_a == 0) {
             memory.value_a += value
@@ -39,10 +43,10 @@ function controlNumbers(value) { ////////////////
             memory.value_a += String(value)
         }
     } else {
-            memory.status_a = false
-            memory.status_b = true
+        memory.status_a = false
+        memory.status_b = true
 
-            if (memory.value_b == 0) {
+        if (memory.value_b == 0) {
             memory.value_b += value
         } else {
             memory.value_b += String(value)
@@ -53,6 +57,7 @@ function controlNumbers(value) { ////////////////
 
 // controlador de operaciones.
 function controlOperations(value) {
+    controlOperations.prev_operator = value
     switch (value) { // filtro para no poner en memory.operation ni 'AC' o 'C' ya que daria problemas.
         case 'AC':
             aux_display.show('AC')
@@ -62,7 +67,7 @@ function controlOperations(value) {
 
         case 'C':
             display.clear()
-            if (memory.status_b) { 
+            if (memory.status_b) {
                 memory.reset.mem_b() // solo borro la memory_value_b.
                 aux_display.show(aux_display.data_a)
                 return // salgo de la funcion.
@@ -82,25 +87,24 @@ function controlOperations(value) {
     }
     if (memory.status_b) {
         resolve() // resuelve las operaciones.
-        memory.operation = ''
+        if (value == '=') {
+            memory.operation = ''
+        } else {
+            memory.operation = value
+        }
         memory.reset.mem_b() // solo borro la memory_value_b.
-        //controlOperations.prev_number = null // reset de variables temporales. //*** NO ELIMINAR ESTA LINEA **//
-        //controlOperations.prev_operator = null // reset de variables temporales. //*** NO ELIMINAR ESTA LINEA **//
     } else {
         if (value != '=') {
             memory.operation = value
-        }else{
-            if(memory.value_b == 0){
+        } else {
+            if (memory.value_b == 0) {
                 memory.value_b = memory.value_a
             }
             resolve()
         }
     }
-    
     render() // mostrar datos en el display.  
 }
-
-
 
 // resuelve las operaciones.
 function resolve() {
