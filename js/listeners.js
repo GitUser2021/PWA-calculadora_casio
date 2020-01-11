@@ -1,43 +1,43 @@
 // listeners de los botones numericos
 ref_btn_0.addEventListener('click', () => {
     send(btn_0.value)
-    enable_operators(['+', '-', '*', '/'])
+    enable_operators(['+', '-', '*', '/', '%'])
 })
 ref_btn_1.addEventListener('click', () => {
     send(btn_1.value)
-    enable_operators(['+', '-', '*', '/'])
+    enable_operators(['+', '-', '*', '/', '%'])
 })
 ref_btn_2.addEventListener('click', () => {
     send(btn_2.value)
-    enable_operators(['+', '-', '*', '/'])
+    enable_operators(['+', '-', '*', '/', '%'])
 })
 ref_btn_3.addEventListener('click', () => {
     send(btn_3.value)
-    enable_operators(['+', '-', '*', '/'])
+    enable_operators(['+', '-', '*', '/', '%'])
 })
 ref_btn_4.addEventListener('click', () => {
     send(btn_4.value)
-    enable_operators(['+', '-', '*', '/'])
+    enable_operators(['+', '-', '*', '/', '%'])
 })
 ref_btn_5.addEventListener('click', () => {
     send(btn_5.value)
-    enable_operators(['+', '-', '*', '/'])
+    enable_operators(['+', '-', '*', '/', '%'])
 })
 ref_btn_6.addEventListener('click', () => {
     send(btn_6.value)
-    enable_operators(['+', '-', '*', '/'])
+    enable_operators(['+', '-', '*', '/', '%'])
 })
 ref_btn_7.addEventListener('click', () => {
     send(btn_7.value)
-    enable_operators(['+', '-', '*', '/'])
+    enable_operators(['+', '-', '*', '/', '%'])
 })
 ref_btn_8.addEventListener('click', () => {
     send(btn_8.value)
-    enable_operators(['+', '-', '*', '/'])
+    enable_operators(['+', '-', '*', '/', '%'])
 })
 ref_btn_9.addEventListener('click', () => {
     send(btn_9.value)
-    enable_operators(['+', '-', '*', '/'])
+    enable_operators(['+', '-', '*', '/', '%'])
 })
 
 ref_btn_dot.addEventListener('click', () => {
@@ -46,7 +46,7 @@ ref_btn_dot.addEventListener('click', () => {
         send(btn_dot.value)
     }
     btn_dot.status = false
-    enable_operators(['+', '-', '*', '/'])
+    enable_operators(['+', '-', '*', '/', '%'])
 })
 
 
@@ -57,7 +57,7 @@ ref_btn_sumar.addEventListener('click', () => {
         send(btn_sumar.value)
     }
     btn_sumar.status = false
-    enable_operators(['-', '*', '/', 'dot'])
+    enable_operators(['-', '*', '/', '%', 'dot'])
 })
 
 ref_btn_restar.addEventListener('click', () => {
@@ -66,7 +66,7 @@ ref_btn_restar.addEventListener('click', () => {
         send(btn_restar.value)
     }
     btn_restar.status = false
-    enable_operators(['+', '*', '/', 'dot'])
+    enable_operators(['+', '*', '/', '%', 'dot'])
 })
 
 ref_btn_multiplicar.addEventListener('click', () => {
@@ -75,7 +75,7 @@ ref_btn_multiplicar.addEventListener('click', () => {
         send(btn_multiplicar.value)
     }
     btn_multiplicar.status = false
-    enable_operators(['+', '-', '/', 'dot'])
+    enable_operators(['+', '-', '/', '%', 'dot'])
 })
 
 ref_btn_dividir.addEventListener('click', () => {
@@ -84,16 +84,21 @@ ref_btn_dividir.addEventListener('click', () => {
         send(btn_dividir.value)
     }
     btn_dividir.status = false
-    enable_operators(['+', '-', '*', 'dot'])
+    enable_operators(['+', '-', '*', '%', 'dot'])
 })
 
 ref_btn_porcentaje.addEventListener('click', () => {
-    send(btn_porcentaje.value)
+    if (btn_porcentaje.status) { // solo se envia si su status es true.
+        console.log('%')
+        send(btn_porcentaje.value)
+    }
+    btn_porcentaje.status = false
+    enable_operators(['+', '-', '*', '/', 'dot'])
 })
 
 ref_btn_igual.addEventListener('click', () => {
     send(btn_igual.value)
-    enable_operators(['+', '-', '*', '/', 'dot'])
+    enable_operators(['+', '-', '*', '/', '%', 'dot'])
 })
 
 
@@ -122,6 +127,9 @@ function enable_operators(operator) {
                 break
             case '/':
                 btn_dividir.status = true
+                break
+            case '%':
+                btn_porcentaje.status = true
                 break
             case 'dot':
                 btn_dot.status = true
