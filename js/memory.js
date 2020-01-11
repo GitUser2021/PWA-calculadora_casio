@@ -56,6 +56,7 @@ function controlOperations(value) {
             aux_display.show('AC')
             display.clear() // limpio el display.
             memory.reset() // reseteo la memoria al estado original.
+            aux_display.data_a = ''
             controlOperations_clear() // reset de variables temporales.
             return // salgo de la funcion.
 
@@ -70,6 +71,7 @@ function controlOperations(value) {
             } else {
                 aux_display.show('C')
                 memory.value_a = 0
+                aux_display.data_a = ''
                 aux_display.value = '' // limpio la memoria del display auxiliar.
                 controlOperations_clear() // reset de variables temporales.
                 return // salgo de la funcion.
@@ -114,7 +116,8 @@ function controlOperations(value) {
         }
     }
 
-    render() // mostrar datos en el display.    
+    render() // mostrar datos en el display.  
+    aux_display.data_b = ''
 }
 
 // reset de variables temporales.
@@ -157,6 +160,11 @@ function resolve() {
                     memory.value_b = (parseFloat(memory.value_b) / 100)
                 }
             }
+            // actualizo con el valor resuelto para poder mostrar en el display
+            // ej: 10 + 50%
+            // se muestra como 10 + 5(valor resuelto) = 15
+            // en vez de 10 + 50% = 15.
+            aux_display.data_b = memory.value_b
             fix_decimal(MAX_DECIMALES)
             break
 
@@ -168,7 +176,7 @@ function resolve() {
         ref_aux_display.innerHTML = ''
         ref_display.innerHTML = '<span id = "error">Numero infinito!</span>'
         memory.reset()
-        //aux_display.data_a = ''
+        aux_display.data_a = ''
         throw Error('Numero infinito!')
     }
 }
