@@ -51,63 +51,70 @@ function controlNumbers(value) {
 
 // controlador de operaciones.
 function controlOperations(value) {
-    if (value == 'AC' || value == 'C') { // filtro para no poner en memory.operation ni 'AC' o 'C' ya que daria problemas.
-        switch (value) {
-            case 'AC':
-                aux_display.show('AC')
-                display.clear() // limpio el display.
-                memory.reset() // reseteo la memoria al estado original.
-                controlOperations_clear() // reset de variables temporales.
-                break
+    switch (value) { // filtro para no poner en memory.operation ni 'AC' o 'C' ya que daria problemas.
+        case 'AC':
+            aux_display.show('AC')
+            display.clear() // limpio el display.
+            memory.reset() // reseteo la memoria al estado original.
+            controlOperations_clear() // reset de variables temporales.
+            return // salgo de la funcion.
 
-            case 'C':
-                display.clear()
-                if (memory.status_b && memory.value_b != 0) {
-                    memory.value_b = 0
-                    memory.status_a = true
-                    memory.status_b = false
-                    aux_display.show(aux_display.data_a)
-                } else {
-                    aux_display.show('C')
-                    memory.value_a = 0
-                    aux_display.value = '' // limpio la memoria del display auxiliar.
-                    controlOperations_clear() // reset de variables temporales.
-                }
-                break
-        }
+        case 'C':
+            display.clear()
+            if (memory.status_b && memory.value_b != 0) {
+                memory.value_b = 0
+                memory.status_a = true
+                memory.status_b = false
+                aux_display.show(aux_display.data_a)
+                return // salgo de la funcion.
+            } else {
+                aux_display.show('C')
+                memory.value_a = 0
+                aux_display.value = '' // limpio la memoria del display auxiliar.
+                controlOperations_clear() // reset de variables temporales.
+                return // salgo de la funcion.
+            }
+
+        case '%':
+            controlOperations.prev_operator = memory.operation // guardo el operador previo al %.
+            memory.operation = value
+            resolve()
+            memory.operation = controlOperations.prev_operator
+            value = '='
+            break
+    }
+    if (memory.status_b) {
+        resolve() // resuelve las operaciones.
+        memory.status_b = false
+        memory.status_a = true
+        memory.value_b = 0
+        memory.operation = value
+        controlOperations_clear() // reset de variables temporales.
     } else {
-        if (memory.status_b) {
+        if (value == '=') {
+            if (memory.value_a == 0 && memory.value_b == 0 && memory.operation == '=') {
+                controlOperations_clear() // reset de variables temporales.
+            }
+            if (controlOperations.prev_number == null) { // variable temporal numero previo.
+                controlOperations.prev_number = memory.value_a
+            }
+            if (controlOperations.prev_operator == null) { // variable temporal operacion previa.
+                controlOperations.prev_operator = memory.operation
+            }
+            memory.value_b = controlOperations.prev_number
+            memory.operation = controlOperations.prev_operator
             resolve() // resuelve las operaciones.
             memory.status_b = false
             memory.status_a = true
             memory.value_b = 0
             memory.operation = value
-            controlOperations_clear() // reset de variables temporales.
         } else {
-            if (value == '=') {
-                if (memory.value_a == 0 && memory.value_b == 0 && memory.operation == '=') {
-                    controlOperations_clear() // reset de variables temporales.
-                }
-                if (controlOperations.prev_number == null) { // variable temporal numero previo.
-                    controlOperations.prev_number = memory.value_a
-                }
-                if (controlOperations.prev_operator == null) { // variable temporal operacion previa.
-                    controlOperations.prev_operator = memory.operation
-                }
-                memory.value_b = controlOperations.prev_number
-                memory.operation = controlOperations.prev_operator
-                resolve() // resuelve las operaciones.
-                memory.status_b = false
-                memory.status_a = true
-                memory.value_b = 0
-                memory.operation = value
-            } else {
-                memory.operation = value
-                controlOperations_clear() // reset de variables temporales.
-            }
+            memory.operation = value
+            controlOperations_clear() // reset de variables temporales.
         }
-        render() // mostrar datos en el display.
     }
+
+    render() // mostrar datos en el display.    
 }
 
 // reset de variables temporales.
@@ -139,16 +146,30 @@ function resolve() {
             fix_decimal(MAX_DECIMALES)
             break
 
+        case '%':
+            memory.value_a = parseFloat(memory.value_a)
+            if (memory.status_a) {
+                memory.value_a = parseFloat(memory.value_a) / 100
+            } else {
+                if (controlOperations.prev_operator == '+' || controlOperations.prev_operator == '-') {
+                    memory.value_b = memory.value_a * (parseFloat(memory.value_b) / 100)
+                } else {
+                    memory.value_b = (parseFloat(memory.value_b) / 100)
+                }
+            }
+            fix_decimal(MAX_DECIMALES)
+            break
+
         default:
             break
     }
     // mensaje si el resultado es infinito.
-    if(memory.value_a == 'Infinity'){
+    if (memory.value_a == 'Infinity') {
         ref_aux_display.innerHTML = ''
         ref_display.innerHTML = '<span id = "error">Numero infinito!</span>'
         memory.reset()
         //aux_display.data_a = ''
-        throw Error ('Numero infinito!')
+        throw Error('Numero infinito!')
     }
 }
 
