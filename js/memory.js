@@ -13,6 +13,15 @@ function Memory() {
         this.operation = ''
         this.status_a = true
         this.status_b = false
+        aux_display.data_a = ''
+        aux_display.value = '' // limpio la memoria del display auxiliar.
+        controlOperations.prev_number = null
+        controlOperations.prev_operator = null
+    }
+    this.reset.mem_b = () => {
+        memory.value_b = 0
+        memory.status_a = true
+        memory.status_b = false
     }
 }
 
@@ -32,7 +41,7 @@ function controlNumbers(value) {
     } else {
         if (memory.operation == '=') {
             memory.operation = ''
-            controlOperations_clear() // reset de variables temporales.
+           // controlOperations_clear() // reset de variables temporales.
             memory.value_a = 0
             memory.value_a += value
 
@@ -56,24 +65,17 @@ function controlOperations(value) {
             aux_display.show('AC')
             display.clear() // limpio el display.
             memory.reset() // reseteo la memoria al estado original.
-            aux_display.data_a = ''
-            controlOperations_clear() // reset de variables temporales.
             return // salgo de la funcion.
 
         case 'C':
             display.clear()
-            if (memory.status_b && memory.value_b != 0) {
-                memory.value_b = 0
-                memory.status_a = true
-                memory.status_b = false
+            if (memory.status_b) { 
+                memory.reset.mem_b() // solo borro la memory_value_b.
                 aux_display.show(aux_display.data_a)
                 return // salgo de la funcion.
             } else {
                 aux_display.show('C')
-                memory.value_a = 0
-                aux_display.data_a = ''
-                aux_display.value = '' // limpio la memoria del display auxiliar.
-                controlOperations_clear() // reset de variables temporales.
+                memory.reset() // reseteo la memoria al estado original.
                 return // salgo de la funcion.
             }
 
@@ -87,15 +89,13 @@ function controlOperations(value) {
     }
     if (memory.status_b) {
         resolve() // resuelve las operaciones.
-        memory.status_b = false
-        memory.status_a = true
-        memory.value_b = 0
         memory.operation = value
-        controlOperations_clear() // reset de variables temporales.
+        memory.reset.mem_b() // solo borro la memory_value_b.
+        //  controlOperations_clear() // reset de variables temporales.
     } else {
         if (value == '=') {
             if (memory.value_a == 0 && memory.value_b == 0 && memory.operation == '=') {
-                controlOperations_clear() // reset de variables temporales.
+                // controlOperations_clear() // reset de variables temporales.
             }
             if (controlOperations.prev_number == null) { // variable temporal numero previo.
                 controlOperations.prev_number = memory.value_a
@@ -106,13 +106,11 @@ function controlOperations(value) {
             memory.value_b = controlOperations.prev_number
             memory.operation = controlOperations.prev_operator
             resolve() // resuelve las operaciones.
-            memory.status_b = false
-            memory.status_a = true
-            memory.value_b = 0
             memory.operation = value
+            memory.reset.mem_b() // solo borro la memory_value_b.
         } else {
             memory.operation = value
-            controlOperations_clear() // reset de variables temporales.
+            // controlOperations_clear() // reset de variables temporales.
         }
     }
 
@@ -120,11 +118,11 @@ function controlOperations(value) {
     aux_display.data_b = ''
 }
 
-// reset de variables temporales.
-function controlOperations_clear() {
-    controlOperations.prev_number = null
-    controlOperations.prev_operator = null
-}
+// reset de variables temporales. //************************* POSIBLE ELIMINACION */
+// function controlOperations_clear() {
+//     controlOperations.prev_number = null
+//     controlOperations.prev_operator = null
+// }
 
 // resuelve las operaciones.
 function resolve() {
