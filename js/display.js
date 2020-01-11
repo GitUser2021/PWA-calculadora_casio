@@ -24,7 +24,6 @@ aux_display.show = (value) => {
 
 // mostrar en el display los datos.
 function render() {
-    if (typeof (aux_display.data) === 'undefined') { aux_display.data = '' }
     if (typeof (aux_display.data_a) === 'undefined') { aux_display.data_a = '' }
     if (typeof (aux_display.data_b) === 'undefined') { aux_display.data_b = '' }
 

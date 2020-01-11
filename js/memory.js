@@ -41,10 +41,8 @@ function controlNumbers(value) {
     } else {
         if (memory.operation == '=') {
             memory.operation = ''
-           // controlOperations_clear() // reset de variables temporales.
             memory.value_a = 0
             memory.value_a += value
-
         } else { // los numeros ingresados se van concatenando en la memory.value_b.
             memory.status_b = true
             memory.status_a = false
@@ -91,11 +89,13 @@ function controlOperations(value) {
         resolve() // resuelve las operaciones.
         memory.operation = value
         memory.reset.mem_b() // solo borro la memory_value_b.
-        //  controlOperations_clear() // reset de variables temporales.
+        controlOperations.prev_number = null // reset de variables temporales. //*** NO ELIMINAR ESTA LINEA **//
+        controlOperations.prev_operator = null // reset de variables temporales. //*** NO ELIMINAR ESTA LINEA **//
     } else {
         if (value == '=') {
-            if (memory.value_a == 0 && memory.value_b == 0 && memory.operation == '=') {
-                // controlOperations_clear() // reset de variables temporales.
+            if (memory.value_b == 0 && memory.value_a != 0) {
+            
+            
             }
             if (controlOperations.prev_number == null) { // variable temporal numero previo.
                 controlOperations.prev_number = memory.value_a
@@ -110,19 +110,11 @@ function controlOperations(value) {
             memory.reset.mem_b() // solo borro la memory_value_b.
         } else {
             memory.operation = value
-            // controlOperations_clear() // reset de variables temporales.
         }
     }
-
+    
     render() // mostrar datos en el display.  
-    aux_display.data_b = ''
 }
-
-// reset de variables temporales. //************************* POSIBLE ELIMINACION */
-// function controlOperations_clear() {
-//     controlOperations.prev_number = null
-//     controlOperations.prev_operator = null
-// }
 
 // resuelve las operaciones.
 function resolve() {
