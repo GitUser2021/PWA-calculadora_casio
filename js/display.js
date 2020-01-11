@@ -24,21 +24,28 @@ aux_display.show = (value) => {
 
 // mostrar en el display los datos.
 function render() {
-    if (memory.status_a) {
+    if (typeof (aux_display.data) === 'undefined') { aux_display.data = '' }
+    if (typeof (aux_display.data_a) === 'undefined') { aux_display.data_a = '' }
+    if (typeof (aux_display.data_b) === 'undefined') { aux_display.data_b = '' }
+
+    if (memory.operation == '=') {
         display.show(memory.value_a)
-        if (typeof (aux_display.data) === 'undefined') { aux_display.data = '' }
-        aux_display.data_a = (memory.value_a + memory.operation)
-        aux_display.show(aux_display.data_a)
+        aux_display.show(aux_display.data_a + ' ' + aux_display.data_b + ' = ' + memory.value_a)
     } else {
-        display.show(memory.value_b)
-        if (typeof (aux_display.data) === 'undefined') { aux_display.data = '' }
-        aux_display.data_b = (memory.value_b)
-        aux_display.value = aux_display.data_a + aux_display.data_b
-        aux_display.show(aux_display.value)
+        if (memory.status_a) {
+            display.show(memory.value_a)
+            aux_display.data_a = (memory.value_a + ' ' + memory.operation)
+            aux_display.show(aux_display.data_a)
+        } else {
+            display.show(memory.value_b)
+            aux_display.data_b = (' ' + memory.value_b)
+            aux_display.value = aux_display.data_a + aux_display.data_b
+            aux_display.show(aux_display.value)
+        }
     }
     // para limitar la cant. de digitos en pantalla.
     // lo ubico al final para que sobre-escriba el display luego de que se hayan
     // renderizado todos los datos.
-    // solamente muestro los datos recortados a la cant. de MAX_NUMBERS.
+    // solamente muestro los datos recortados por el valor de MAX_NUMBERS.
     check_max_numbers()
 }
