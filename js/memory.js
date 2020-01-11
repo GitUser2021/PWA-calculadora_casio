@@ -31,7 +31,7 @@ let memory = new Memory
 // controlador de numeros.
 // los numeros ingresados se van concatenando en la memory.value_a.
 // hasta que se ingresa un operador, entonces los siguientes numeros se ingresaran en la memory.value_b.
-function controlNumbers(value) {
+function controlNumbers(value) { ////////////////
     if (memory.operation == '') {
         if (memory.value_a == 0) {
             memory.value_a += value
@@ -39,18 +39,13 @@ function controlNumbers(value) {
             memory.value_a += String(value)
         }
     } else {
-        if (memory.operation == '=') {
-            memory.operation = ''
-            memory.value_a = 0
-            memory.value_a += value
-        } else { // los numeros ingresados se van concatenando en la memory.value_b.
-            memory.status_b = true
             memory.status_a = false
+            memory.status_b = true
+
             if (memory.value_b == 0) {
-                memory.value_b += value
-            } else {
-                memory.value_b += String(value)
-            }
+            memory.value_b += value
+        } else {
+            memory.value_b += String(value)
         }
     }
     render() // mostrar datos en el display.
@@ -87,34 +82,25 @@ function controlOperations(value) {
     }
     if (memory.status_b) {
         resolve() // resuelve las operaciones.
-        memory.operation = value
+        memory.operation = ''
         memory.reset.mem_b() // solo borro la memory_value_b.
-        controlOperations.prev_number = null // reset de variables temporales. //*** NO ELIMINAR ESTA LINEA **//
-        controlOperations.prev_operator = null // reset de variables temporales. //*** NO ELIMINAR ESTA LINEA **//
+        //controlOperations.prev_number = null // reset de variables temporales. //*** NO ELIMINAR ESTA LINEA **//
+        //controlOperations.prev_operator = null // reset de variables temporales. //*** NO ELIMINAR ESTA LINEA **//
     } else {
-        if (value == '=') {
-            if (memory.value_b == 0 && memory.value_a != 0) {
-            
-            
-            }
-            if (controlOperations.prev_number == null) { // variable temporal numero previo.
-                controlOperations.prev_number = memory.value_a
-            }
-            if (controlOperations.prev_operator == null) { // variable temporal operacion previa.
-                controlOperations.prev_operator = memory.operation
-            }
-            memory.value_b = controlOperations.prev_number
-            memory.operation = controlOperations.prev_operator
-            resolve() // resuelve las operaciones.
+        if (value != '=') {
             memory.operation = value
-            memory.reset.mem_b() // solo borro la memory_value_b.
-        } else {
-            memory.operation = value
+        }else{
+            if(memory.value_b == 0){
+                memory.value_b = memory.value_a
+            }
+            resolve()
         }
     }
     
     render() // mostrar datos en el display.  
 }
+
+
 
 // resuelve las operaciones.
 function resolve() {
