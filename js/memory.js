@@ -13,10 +13,10 @@ function Memory() {
         this.operation = ''
         this.status_a = true
         this.status_b = false
-        aux_display.data_a = ''
-        aux_display.value = '' // limpio la memoria del display auxiliar.
+        aux_display.memory_reset() // limpio la memoria del display auxiliar.
         controlOperations.prev_number = null
         controlOperations.prev_operator = null
+        enable_operators(['all'])
     }
     this.reset.mem_b = () => {
         memory.value_b = 0
@@ -32,7 +32,7 @@ let memory = new Memory
 // los numeros ingresados se van concatenando en la memory.value_a.
 // hasta que se ingresa un operador, entonces los siguientes numeros se ingresaran en la memory.value_b.
 function controlNumbers(value) { ////////////////
-    if (memory.operation == '' && controlOperations.prev_operator == '=') {
+    if (controlOperations.prev_operator == '=') {
         memory.reset()
     }
 
@@ -58,7 +58,30 @@ function controlNumbers(value) { ////////////////
 // controlador de operaciones.
 function controlOperations(value) {
     controlOperations.prev_operator = value
+
     switch (value) { // filtro para no poner en memory.operation ni 'AC' o 'C' ya que daria problemas.
+        case '=':
+            if (memory.operation == '') {
+                return
+            } else {
+                if (memory.status_a) {
+                    ///////controlOperations.prev_operator = value
+                    if (memory.value_b == 0) {
+                        memory.value_b = memory.value_a
+                    }
+                    resolve()
+                    break
+                } else {
+                    controlOperations.prev_operator = value
+                    resolve()
+                    render()
+                    memory.reset.mem_b()
+                    aux_display.memory_reset()
+                    memory.operation = ''
+                    return
+                }
+            }
+
         case 'AC':
             aux_display.show('AC')
             display.clear() // limpio el display.
@@ -78,32 +101,53 @@ function controlOperations(value) {
             }
 
         case '%':
-            controlOperations.prev_operator = memory.operation // guardo el operador previo al %.
-            memory.operation = value
-            resolve()
-            memory.operation = controlOperations.prev_operator
-            value = '='
+            if (memory.status_a) {
+                memory.operation = controlOperations.prev_operator
+                resolve()
+                aux_display.data_a += memory.operation
+                controlOperations.prev_operator = '='
+                memory.operation = '='
+                break // salgo de la funcion.
+            } else {
+                var temp = memory.operation // swap de variables.
+                memory.operation = controlOperations.prev_operator
+                controlOperations.prev_operator = temp
+                aux_display.data_b += memory.operation // concateno el %, resuelvo y concateno el resultado ej: 10 + 50% (5) = 15
+                resolve()
+                aux_display.data_b += ' (' + memory.value_b + ') '
+                memory.reset.mem_b() // solo borro la memory_value_b.
+                memory.operation = ''
+                controlOperations.prev_operator = '='
+            }
+            break
+
+        default: // se controlan los operadores ( + , - , * , / ).
+            if (memory.operation == '' && memory.value_a == 0) {
+                resolve()
+                memory.status_a = true
+                memory.status_b = false
+                memory.operation = value
+            } else {
+                if (memory.status_a && memory.value_b != 0) {
+                    memory.value_b = 0
+                } else {
+                    resolve()
+                    memory.value_b = 0
+                    memory.status_a = true
+                    memory.status_b = false
+                    memory.operation = value
+                    break
+                }
+            }
             break
     }
-    if (memory.status_b) {
-        resolve() // resuelve las operaciones.
-        if (value == '=') {
-            memory.operation = ''
-        } else {
-            memory.operation = value
-        }
-        memory.reset.mem_b() // solo borro la memory_value_b.
-    } else {
-        if (value != '=') {
-            memory.operation = value
-        } else {
-            if (memory.value_b == 0) {
-                memory.value_b = memory.value_a
-            }
-            resolve()
-        }
-    }
+
     render() // mostrar datos en el display.  
+
+    if (controlOperations.prev_operator == '=') { // limpio la memoria del display auxiliar.
+        aux_display.data_b = ''
+        aux_display.value = ''
+    }
 }
 
 // resuelve las operaciones.
@@ -133,18 +177,18 @@ function resolve() {
             memory.value_a = parseFloat(memory.value_a)
             if (memory.status_a) {
                 memory.value_a = parseFloat(memory.value_a) / 100
+                return // salgo de la funcion.
             } else {
                 if (controlOperations.prev_operator == '+' || controlOperations.prev_operator == '-') {
                     memory.value_b = memory.value_a * (parseFloat(memory.value_b) / 100)
+                    memory.operation = controlOperations.prev_operator // devuelvo el operador (+ o - en este caso).
+                    resolve()
                 } else {
                     memory.value_b = (parseFloat(memory.value_b) / 100)
+                    memory.operation = controlOperations.prev_operator // devuelvo el operador (* o / en este caso).
+                    resolve()
                 }
             }
-            // actualizo con el valor resuelto para poder mostrar en el display
-            // ej: 10 + 50%
-            // se muestra como 10 + 5(valor resuelto) = 15
-            // en vez de 10 + 50% = 15.
-            aux_display.data_b = memory.value_b
             fix_decimal(MAX_DECIMALES)
             break
 

@@ -11,6 +11,11 @@ function Display() {
     this.clear = () => {
         this.show(0)
     }
+    this.memory_reset = () => {
+        aux_display.data_a = ''
+        aux_display.data_b = ''
+        aux_display.value = ''
+    }
 }
 
 // instanciacion de display
@@ -27,7 +32,7 @@ function render() {
     if (typeof (aux_display.data_a) === 'undefined') { aux_display.data_a = '' }
     if (typeof (aux_display.data_b) === 'undefined') { aux_display.data_b = '' }
 
-    if (memory.operation == '=') {
+    if (controlOperations.prev_operator == '=') {
         display.show(memory.value_a)
         aux_display.show(aux_display.data_a + ' ' + aux_display.data_b + ' = ' + memory.value_a)
     } else {
