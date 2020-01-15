@@ -113,6 +113,12 @@ ref_btn_ac.addEventListener('click', () => {
 ref_btn_c.addEventListener('click', () => {
     send(btn_c.value)
 })
+ref_btn_c.addEventListener('click', () => {
+    send(btn_c.value)
+})
+ref_btn_signo.addEventListener('click', () => {
+    send(btn_signo.value)
+})
 
 
 // funcion para activar los operadores.

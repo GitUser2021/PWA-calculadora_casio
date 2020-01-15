@@ -23,6 +23,7 @@ let ref_btn_igual = document.getElementById('btn_igual')
 // referencias a los botones de funciones.
 let ref_btn_ac = document.getElementById('btn_ac')
 let ref_btn_c = document.getElementById('btn_c')
+let ref_btn_signo = document.getElementById('btn_signo')
 
 // referencias a los displays.
 let ref_display = document.getElementById('main_display')

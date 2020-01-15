@@ -28,3 +28,4 @@ let btn_dot = new Button('.')
 // instanciacion de los botones de funciones
 let btn_ac = new Button('AC')
 let btn_c = new Button('C')
+let btn_signo = new Button('signo')

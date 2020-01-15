@@ -129,6 +129,10 @@ function controlOperations(value) {
             }
             break
 
+            case 'signo':
+                memory.value_a = memory.value_a * -1
+                break
+                
         default: // se controlan los operadores ( + , - , * , / ).
             if (memory.operation == '' && memory.value_a == 0) {
                 resolve()
