@@ -1,5 +1,5 @@
 // constructor de memoria.
-function Memory() {
+function Memory() { // estoy en testing.......
     this.value_a = 0 // valor memoria a.
     this.value_b = 0 // valor memoria b.
 
