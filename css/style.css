@@ -100,7 +100,7 @@ body{
     left: calc(16.5vw * var(--porcentaje));
     text-align: right;
     line-height: calc(37vw * var(--porcentaje));
-    font-size: calc(14.5vw * var(--porcentaje));
+    font-size: calc(13vw * var(--porcentaje));
 }
 #aux_display{
     font-size: calc(5vw * var(--porcentaje));
