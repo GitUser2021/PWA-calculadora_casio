@@ -32,6 +32,7 @@ function render() {
     if (typeof (aux_display.data) === 'undefined') { aux_display.data = '' }
     if (typeof (aux_display.data_a) === 'undefined') { aux_display.data_a = '' }
     if (typeof (aux_display.data_b) === 'undefined') { aux_display.data_b = '' }
+    if (typeof (controlOperations.prev_number) === 'undefined') { controlOperations.prev_number = '' }
 
     if (controlOperations.prev_operator == '=') {
         display.show(memory.value_a)

@@ -14,8 +14,8 @@ function Memory() {
         this.status_a = true
         this.status_b = false
         aux_display.memory_reset() // limpio la memoria del display auxiliar.
-        controlOperations.prev_number = null
-        controlOperations.prev_operator = null
+        controlOperations.prev_number = ''
+        controlOperations.prev_operator = ''
         enable_operators(['all'])
     }
     this.reset.mem_b = () => {
@@ -108,8 +108,11 @@ function controlOperations(value) {
         case '%':
             if (memory.status_a) {
                 memory.operation = controlOperations.prev_operator
+                controlOperations.prev_number = memory.value_a
+                aux_display.data_a = ''
                 resolve()
-                aux_display.data_a += memory.operation
+                memory.value_b = 0
+                aux_display.data_a += controlOperations.prev_number + memory.operation
                 controlOperations.prev_operator = '='
                 memory.operation = '='
                 break // salgo de la funcion.
