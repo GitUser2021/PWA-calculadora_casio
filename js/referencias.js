@@ -35,3 +35,6 @@ let ref_aux_display = document.getElementById('aux_display')
 const MAX_NUMBERS = 9
 // constante maxima cantidad de decimales.
 const MAX_DECIMALES = 5
+
+// status encendido/apagado.
+let power = true

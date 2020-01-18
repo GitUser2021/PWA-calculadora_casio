@@ -1,7 +1,7 @@
 // listeners de los botones numericos.
-for(let i = 0 ; i < 10 ; i ++){
+for (let i = 0; i < 10; i++) {
     window['ref_btn_' + i].addEventListener('click', () => {
-        if ( window['btn_' + i].status) { // solo se envia si su status es true.
+        if (window['btn_' + i].status) { // solo se envia si su status es true.
             console.log(window['btn_' + i].value)
             send(window['btn_' + i].value)
         }
@@ -17,7 +17,6 @@ ref_btn_dot.addEventListener('click', () => {
     enable_operators('all')
     btn_dot.status = false
 })
-
 
 // listeners de los botones de operaciones.
 ref_btn_sumar.addEventListener('click', () => {
@@ -85,12 +84,11 @@ ref_btn_raiz.addEventListener('click', () => {
 
 // listeners de los botones de funciones.
 ref_btn_ac.addEventListener('click', () => {
+    power = true // enciendo la calculadora.
     send(btn_ac.value)
 })
 ref_btn_c.addEventListener('click', () => {
-    send(btn_c.value)
-})
-ref_btn_c.addEventListener('click', () => {
+    power = true // enciendo la calculadora.
     send(btn_c.value)
 })
 ref_btn_signo.addEventListener('click', () => {
@@ -103,6 +101,7 @@ ref_btn_off.addEventListener('click', () => {
 
 // funcion para activar los operadores.
 function enable_operators(operator) {
+    if (power) {
         switch (operator) {
             case 'all':
                 btn_sumar.status = true
@@ -132,25 +131,6 @@ function enable_operators(operator) {
                 btn_porcentaje.status = true
                 btn_igual.status = true
                 break
-            case 'none':
-                btn_sumar.status = false
-                btn_restar.status = false
-                btn_multiplicar.status = false
-                btn_dividir.status = false
-                btn_porcentaje.status = false
-                btn_raiz.status = false
-                btn_dot.status = false
-                btn_igual.status = false
-                btn_0.status = false
-                btn_1.status = false
-                btn_2.status = false
-                btn_3.status = false
-                btn_4.status = false
-                btn_5.status = false
-                btn_6.status = false
-                btn_7.status = false
-                btn_8.status = false
-                btn_9.status = false
-                break
         }
+    }
 }

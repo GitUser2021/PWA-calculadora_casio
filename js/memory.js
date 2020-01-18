@@ -142,7 +142,7 @@ function controlOperations(value) {
                 memory.reset()
                 aux_display.show('')
                 display.show('OFF')                
-                enable_operators('none')
+                power = false
                 return
                 
         default: // se controlan los operadores ( + , - , * , / ).
