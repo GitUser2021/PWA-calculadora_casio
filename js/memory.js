@@ -2,9 +2,11 @@
 function Memory() {
     this.value_a = 0 // valor memoria a.
     this.value_b = 0 // valor memoria b.
+    this.value_c = 0 // valor de memoria para M+ , M-. 
 
     this.status_a = true // indica si la memoria esta activa.
     this.status_b = false // indica si la memoria esta activa.
+    this.status_c = false // status para borrar la memoria aux (memory.value_c).
 
     this.operation = '' // indica el valor de la operacion (suma,resta,etc).
     this.reset = () => { // reseta la memoria a su estado original.
@@ -32,6 +34,7 @@ let memory = new Memory
 // los numeros ingresados se van concatenando en la memory.value_a.
 // hasta que se ingresa un operador, entonces los siguientes numeros se ingresaran en la memory.value_b.
 function controlNumbers(value) {
+    memory.status_c = false // flag para no borrar la memoria aux (memory.value_c).
     if (controlOperations.prev_operator == '=') {
         memory.reset()
     }
@@ -63,6 +66,9 @@ function controlNumbers(value) {
 
 // controlador de operaciones.
 function controlOperations(value) {
+    if (value != 'mrc') {
+        memory.status_c = false // flag para no borrar la memoria aux (memory.value_c).
+    }
     controlOperations.prev_operator = value
 
     switch (value) { // filtro para no poner en memory.operation ni 'AC' o 'C' ya que daria problemas.
@@ -130,21 +136,52 @@ function controlOperations(value) {
             }
             break
 
-            case 'signo':
-                memory.value_a = memory.value_a * -1
-                break
+        case 'signo':
+            memory.value_a = memory.value_a * -1
+            break
 
-            case 'raiz':
-                memory.value_a = Math.sqrt(memory.value_a)
-                break
+        case 'raiz':
+            memory.value_a = Math.sqrt(memory.value_a)
+            break
 
-            case 'off':
-                memory.reset()
-                aux_display.show('')
-                display.show('OFF')                
-                power = false
+        case 'off':
+            memory.reset()
+            aux_display.show('')
+            display.show('OFF')
+            power = false
+            return
+
+        case 'mem_suma':
+            controlOperations('=')
+            memory.value_c += memory.value_a
+            aux_display.show('M+ = ' + memory.value_c)
+            return
+
+        case 'mem_resta':
+            controlOperations('=')
+            memory.value_c -= memory.value_a
+            aux_display.show('M- = ' + memory.value_c)
+            return
+
+        case 'mrc':
+            if (memory.status_c) { // borrar la memoria aux ().
+                memory.value_c = 0
+                aux_display.show('Memory Clear')
                 return
-                
+            }
+            controlOperations.prev_operator = memory.operation
+            if (memory.operation != '') { // si hay una operacion entonces envio el valor de la memoria como si fuera un numero ingresado manualmente.
+                send(memory.value_c)
+            } else { // de lo contrario cargo el valor de memoria guardado en la memoria principal.
+                memory.value_a = memory.value_c
+                aux_display.show('Memory = ' + memory.value_c)
+                display.show(memory.value_c)
+                controlOperations.prev_operator = '='
+                memory.status_c = true
+            }
+            return
+
+
         default: // se controlan los operadores ( + , - , * , / ).
             if (memory.operation == '' && memory.value_a == 0) {
                 resolve()

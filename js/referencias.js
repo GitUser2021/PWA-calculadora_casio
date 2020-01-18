@@ -26,6 +26,9 @@ let ref_btn_ac = document.getElementById('btn_ac')
 let ref_btn_c = document.getElementById('btn_c')
 let ref_btn_signo = document.getElementById('btn_signo')
 let ref_btn_off = document.getElementById('btn_off')
+let ref_btn_mrc = document.getElementById('btn_memory_record')
+let ref_btn_mem_suma = document.getElementById('btn_memory_sumar')
+let ref_btn_mem_resta = document.getElementById('btn_memory_restar')
 
 // referencias a los displays.
 let ref_display = document.getElementById('main_display')

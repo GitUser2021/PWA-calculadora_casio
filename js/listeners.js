@@ -81,7 +81,6 @@ ref_btn_raiz.addEventListener('click', () => {
     enable_operators('all')
 })
 
-
 // listeners de los botones de funciones.
 ref_btn_ac.addEventListener('click', () => {
     power = true // enciendo la calculadora.
@@ -96,6 +95,19 @@ ref_btn_signo.addEventListener('click', () => {
 })
 ref_btn_off.addEventListener('click', () => {
     send(btn_off.value)
+})
+ref_btn_mrc.addEventListener('click', () => {
+    console.log('mrc')
+    send(btn_mrc.value)
+    enable_operators('all')
+})
+ref_btn_mem_suma.addEventListener('click', () => {
+    console.log('mem suma')
+    send(btn_mem_suma.value)
+})
+ref_btn_mem_resta.addEventListener('click', () => {
+    console.log('mem resta')
+    send(btn_mem_resta.value)
 })
 
 
