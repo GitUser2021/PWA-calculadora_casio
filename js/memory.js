@@ -91,6 +91,7 @@ function controlOperations(value) {
             aux_display.show('AC')
             display.clear() // limpio el display.
             memory.reset() // reseteo la memoria al estado original.
+            enable_operators('all')
             return // salgo de la funcion.
 
         case 'C':
@@ -132,6 +133,17 @@ function controlOperations(value) {
             case 'signo':
                 memory.value_a = memory.value_a * -1
                 break
+
+            case 'raiz':
+                memory.value_a = Math.sqrt(memory.value_a)
+                break
+
+            case 'off':
+                memory.reset()
+                aux_display.show('')
+                display.show('OFF')                
+                enable_operators('none')
+                return
                 
         default: // se controlan los operadores ( + , - , * , / ).
             if (memory.operation == '' && memory.value_a == 0) {

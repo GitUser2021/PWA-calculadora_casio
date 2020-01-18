@@ -1,44 +1,13 @@
 // listeners de los botones numericos.
-ref_btn_0.addEventListener('click', () => {
-    send(btn_0.value)
-    enable_operators('operators_only')
-})
-ref_btn_1.addEventListener('click', () => {
-    send(btn_1.value)
-    enable_operators('operators_only')
-})
-ref_btn_2.addEventListener('click', () => {
-    send(btn_2.value)
-    enable_operators('operators_only')
-})
-ref_btn_3.addEventListener('click', () => {
-    send(btn_3.value)
-    enable_operators('operators_only')
-})
-ref_btn_4.addEventListener('click', () => {
-    send(btn_4.value)
-    enable_operators('operators_only')
-})
-ref_btn_5.addEventListener('click', () => {
-    send(btn_5.value)
-    enable_operators('operators_only')
-})
-ref_btn_6.addEventListener('click', () => {
-    send(btn_6.value)
-    enable_operators('operators_only')
-})
-ref_btn_7.addEventListener('click', () => {
-    send(btn_7.value)
-    enable_operators('operators_only')
-})
-ref_btn_8.addEventListener('click', () => {
-    send(btn_8.value)
-    enable_operators('operators_only')
-})
-ref_btn_9.addEventListener('click', () => {
-    send(btn_9.value)
-    enable_operators('operators_only')
-})
+for(let i = 0 ; i < 10 ; i ++){
+    window['ref_btn_' + i].addEventListener('click', () => {
+        if ( window['btn_' + i].status) { // solo se envia si su status es true.
+            console.log(window['btn_' + i].value)
+            send(window['btn_' + i].value)
+        }
+        enable_operators('operators_only')
+    })
+}
 
 ref_btn_dot.addEventListener('click', () => {
     if (btn_dot.status) { // solo se envia si su status es true.
@@ -105,6 +74,14 @@ ref_btn_igual.addEventListener('click', () => {
     enable_operators('all')
 })
 
+ref_btn_raiz.addEventListener('click', () => {
+    if (btn_raiz.status) {
+        console.log('raiz')
+        send(btn_raiz.value)
+    }
+    enable_operators('all')
+})
+
 
 // listeners de los botones de funciones.
 ref_btn_ac.addEventListener('click', () => {
@@ -119,6 +96,9 @@ ref_btn_c.addEventListener('click', () => {
 ref_btn_signo.addEventListener('click', () => {
     send(btn_signo.value)
 })
+ref_btn_off.addEventListener('click', () => {
+    send(btn_off.value)
+})
 
 
 // funcion para activar los operadores.
@@ -131,7 +111,18 @@ function enable_operators(operator) {
                 btn_dividir.status = true
                 btn_porcentaje.status = true
                 btn_dot.status = true
+                btn_raiz.status = true
                 btn_igual.status = true
+                btn_0.status = true
+                btn_1.status = true
+                btn_2.status = true
+                btn_3.status = true
+                btn_4.status = true
+                btn_5.status = true
+                btn_6.status = true
+                btn_7.status = true
+                btn_8.status = true
+                btn_9.status = true
                 break
             case 'operators_only':
                 btn_sumar.status = true
@@ -140,6 +131,26 @@ function enable_operators(operator) {
                 btn_dividir.status = true
                 btn_porcentaje.status = true
                 btn_igual.status = true
+                break
+            case 'none':
+                btn_sumar.status = false
+                btn_restar.status = false
+                btn_multiplicar.status = false
+                btn_dividir.status = false
+                btn_porcentaje.status = false
+                btn_raiz.status = false
+                btn_dot.status = false
+                btn_igual.status = false
+                btn_0.status = false
+                btn_1.status = false
+                btn_2.status = false
+                btn_3.status = false
+                btn_4.status = false
+                btn_5.status = false
+                btn_6.status = false
+                btn_7.status = false
+                btn_8.status = false
+                btn_9.status = false
                 break
         }
 }
