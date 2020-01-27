@@ -2,6 +2,17 @@
     --porcentaje: 1;
 }
 
+html{
+    touch-action: pan-down;
+}
+
+.no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; 
+}
+
 body{
     background: black;
 }
@@ -102,6 +113,7 @@ body{
     line-height: calc(37vw * var(--porcentaje));
     font-size: calc(13vw * var(--porcentaje));
 }
+
 #aux_display{
     font-size: calc(5vw * var(--porcentaje));
     width: calc(65vw * var(--porcentaje));
