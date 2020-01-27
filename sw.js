@@ -1,12 +1,12 @@
 // importScripts('js/app.js')
 console.log('sw.js loaded') 
 
-const version = "1.0.6";
+const version = "1.0.0";
 const static_cacheName = `static-v-${version}`
 const dynamic_cacheName = `dynamic-v-${version}`
 let cachex = [
     "/",
-    "calculadora_casio.html",
+    "index.html",
     "css/style.css",
     "css/media_query.css",
     "css/images/icons/icon-144x144.png",
