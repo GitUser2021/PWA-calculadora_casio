@@ -5,7 +5,7 @@ const version = "1.0.0";
 const static_cacheName = `static-v-${version}`
 const dynamic_cacheName = `dynamic-v-${version}`
 let cachex = [
-    "/",
+    // "/",
     "index.html",
     "css/style.css",
     "css/media_query.css",
