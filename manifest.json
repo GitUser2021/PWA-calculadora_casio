@@ -5,7 +5,7 @@
   "background_color": "#514757",
   "display": "standalone",
   "orientation": "portrait",
-  "start_url": "calculadora_casio.html",
+  "start_url": "index.html",
   "icons": [
     {
       "src": "css/images/icons/icon-72x72.png",
