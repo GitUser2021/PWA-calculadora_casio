@@ -3,9 +3,12 @@ let images = document.querySelectorAll('img')
 images.forEach(image => {
     image.ontouchstart = () => { return false }
 })
+//-----------------------------------------------------------------------------------------------------------------------
+
 
 // deteccion de dispositivo tactil.
-let event = 'mousedown'
+let event_down = 'mousedown'
+let event_up = 'mouseup'
 function is_touch_enabled() {
     return ('ontouchstart' in window) ||
         (navigator.maxTouchPoints > 0) ||
@@ -13,11 +16,14 @@ function is_touch_enabled() {
 }
 
 // cambio el evento si es dispositivo tactil.
-is_touch_enabled() ? event = 'touchstart' : event
+is_touch_enabled() ? event_down = 'touchstart' : event_down
+is_touch_enabled() ? event_up = 'touchend' : event_up
+//-----------------------------------------------------------------------------------------------------------------------
 
-// listeners de los botones numericos.
+
+// listeners de los botones numericos y el punto.
 for (let i = 0; i < 10; i++) {
-    window['ref_btn_' + i].addEventListener(event, () => {
+    window['ref_btn_' + i].addEventListener(event_down, () => {
         if (window['btn_' + i].status) { // solo se envia si su status es true.
             console.log(window['btn_' + i].value)
             send(window['btn_' + i].value)
@@ -26,7 +32,7 @@ for (let i = 0; i < 10; i++) {
     })
 }
 
-ref_btn_dot.addEventListener(event, () => {
+ref_btn_dot.addEventListener(event_down, () => {
     if (btn_dot.status) { // solo se envia si su status es true.
         console.log('.')
         send(btn_dot.value)
@@ -34,9 +40,11 @@ ref_btn_dot.addEventListener(event, () => {
     enable_operators('all')
     btn_dot.status = false
 })
+//-----------------------------------------------------------------------------------------------------------------------
+
 
 // listeners de los botones de operaciones.
-ref_btn_sumar.addEventListener(event, () => {
+ref_btn_sumar.addEventListener(event_down, () => {
     if (btn_sumar.status) { // solo se envia si su status es true.
         console.log('+')
         send(btn_sumar.value)
@@ -45,7 +53,7 @@ ref_btn_sumar.addEventListener(event, () => {
     btn_sumar.status = false
 })
 
-ref_btn_restar.addEventListener(event, () => {
+ref_btn_restar.addEventListener(event_down, () => {
     if (btn_restar.status) { // solo se envia si su status es true.
         console.log('-')
         send(btn_restar.value)
@@ -54,7 +62,7 @@ ref_btn_restar.addEventListener(event, () => {
     btn_restar.status = false
 })
 
-ref_btn_multiplicar.addEventListener(event, () => {
+ref_btn_multiplicar.addEventListener(event_down, () => {
     if (btn_multiplicar.status) { // solo se envia si su status es true.
         console.log('*')
         send(btn_multiplicar.value)
@@ -63,7 +71,7 @@ ref_btn_multiplicar.addEventListener(event, () => {
     btn_multiplicar.status = false
 })
 
-ref_btn_dividir.addEventListener(event, () => {
+ref_btn_dividir.addEventListener(event_down, () => {
     if (btn_dividir.status) { // solo se envia si su status es true.
         console.log('/')
         send(btn_dividir.value)
@@ -72,7 +80,7 @@ ref_btn_dividir.addEventListener(event, () => {
     btn_dividir.status = false
 })
 
-ref_btn_porcentaje.addEventListener(event, () => {
+ref_btn_porcentaje.addEventListener(event_down, () => {
     if (btn_porcentaje.status) { // solo se envia si su status es true.
         console.log('%')
         btn_igual.status = false // para que luego de usar el % no se pueda presionar el igual y se resuelva el % varias veces.
@@ -82,7 +90,7 @@ ref_btn_porcentaje.addEventListener(event, () => {
     btn_porcentaje.status = false
 })
 
-ref_btn_igual.addEventListener(event, () => {
+ref_btn_igual.addEventListener(event_down, () => {
     if (btn_igual.status) {
         console.log('=')
         send(btn_igual.value)
@@ -90,42 +98,45 @@ ref_btn_igual.addEventListener(event, () => {
     enable_operators('all')
 })
 
-ref_btn_raiz.addEventListener(event, () => {
+ref_btn_raiz.addEventListener(event_down, () => {
     if (btn_raiz.status) {
         console.log('raiz')
         send(btn_raiz.value)
     }
     enable_operators('all')
 })
+//-----------------------------------------------------------------------------------------------------------------------
+
 
 // listeners de los botones de funciones.
-ref_btn_ac.addEventListener(event, () => {
+ref_btn_ac.addEventListener(event_down, () => {
     power = true // enciendo la calculadora.
     send(btn_ac.value)
 })
-ref_btn_c.addEventListener(event, () => {
+ref_btn_c.addEventListener(event_down, () => {
     power = true // enciendo la calculadora.
     send(btn_c.value)
 })
-ref_btn_signo.addEventListener(event, () => {
+ref_btn_signo.addEventListener(event_down, () => {
     send(btn_signo.value)
 })
-ref_btn_off.addEventListener(event, () => {
+ref_btn_off.addEventListener(event_down, () => {
     send(btn_off.value)
 })
-ref_btn_mrc.addEventListener(event, () => {
+ref_btn_mrc.addEventListener(event_down, () => {
     console.log('mrc')
     send(btn_mrc.value)
     enable_operators('all')
 })
-ref_btn_mem_suma.addEventListener(event, () => {
+ref_btn_mem_suma.addEventListener(event_down, () => {
     console.log('mem suma')
     send(btn_mem_suma.value)
 })
-ref_btn_mem_resta.addEventListener(event, () => {
+ref_btn_mem_resta.addEventListener(event_down, () => {
     console.log('mem resta')
     send(btn_mem_resta.value)
 })
+//-----------------------------------------------------------------------------------------------------------------------
 
 
 // funcion para activar los operadores.
