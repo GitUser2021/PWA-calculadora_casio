@@ -1,7 +1,7 @@
 // importScripts('js/app.js')
 console.log('sw.js loaded') 
 
-const version = "1.0.0";
+const version = "0.0.0";
 const static_cacheName = `static-v-${version}`
 const dynamic_cacheName = `dynamic-v-${version}`
 let cachex = [
@@ -42,7 +42,8 @@ let cachex = [
     "js/main.js",
     "js/memory.js",
     "js/referencias.js",
-    "js/listeners.js"
+    "js/listeners.js",
+    "js/efectos.js",
 ]
 
 self.addEventListener('install', e => {

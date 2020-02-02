@@ -146,7 +146,7 @@ function controlOperations(value) {
                 controlOperations.prev_operator = temp
                 aux_display.data_b += memory.operation // concateno el %, resuelvo y concateno el resultado ej: 10 + 50% (5) = 15
                 resolve()
-                aux_display.data_b += ' (' + memory.value_b + ') '
+                aux_display.data_b += ` ( ${memory.value_b} ) `
                 memory.reset.mem_b() // solo borro la memory_value_b.
                 memory.operation = ''
                 controlOperations.prev_operator = '='
@@ -158,8 +158,12 @@ function controlOperations(value) {
             break
 
         case 'raiz':
+            temp = memory.value_a
             memory.value_a = Math.sqrt(memory.value_a)
-            break
+            aux_display.show(`√ ${temp} = ${memory.value_a}`)
+            display.show(memory.value_a)
+            memory.operation = '='
+            return
 
         case 'off':
             memory.reset()
@@ -172,13 +176,13 @@ function controlOperations(value) {
             memory.value_a = parseFloat(memory.value_a)  // fix m+ concatenaba los numeros con coma en la memoria.
             controlOperations('=')
             memory.value_c += memory.value_a
-            aux_display.show('M+ = ' + memory.value_c)
+            aux_display.show(`M+ =  ${memory.value_c}`)
             return
 
         case 'mem_resta':
             controlOperations('=')
             memory.value_c -= memory.value_a
-            aux_display.show('M- = ' + memory.value_c)
+            aux_display.show(`M- = ${memory.value_c}`)
             return
 
         case 'mrc':
@@ -192,7 +196,7 @@ function controlOperations(value) {
                 memory.status_c = true
             } else { // de lo contrario cargo el valor de memoria guardado en la memoria principal.
                 memory.value_a = memory.value_c
-                aux_display.show('Memory = ' + memory.value_c)
+                aux_display.show(`Memory = ${memory.value_c}`)
                 display.show(memory.value_c)
                 controlOperations.prev_operator = '='
                 memory.status_c = true
@@ -210,11 +214,16 @@ function controlOperations(value) {
                 if (memory.status_a && memory.value_b != 0) {
                     memory.value_b = 0
                 } else {
-                    resolve()
-                    memory.value_b = 0
-                    memory.status_a = true
-                    memory.status_b = false
-                    memory.operation = value
+                    if (!memory.status_b) {
+                        memory.operation = value
+                    } else {
+                        resolve()
+                        memory.value_b = 0
+                        memory.status_a = true
+                        memory.status_b = false
+                        memory.operation = value
+                        break
+                    }
                     break
                 }
             }
