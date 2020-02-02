@@ -51,13 +51,22 @@ function controlNumbers(value) {
             memory.value_a = 0
             memory.value_a += value
 
-        } else { // los numeros ingresados se van concatenando en la memory.value_b.
-            memory.status_b = true
-            memory.status_a = false
-            if (memory.value_b == 0) {
-                memory.value_b += value
+            // los numeros ingresados se van concatenando en la memory.value_b.
+            // pero si el numero viene de mrc se guarda sin concatenar.
+        } else {
+            if (controlOperations.prev_operator == 'mrc') {
+                memory.value_b = memory.value_c
+                memory.status_b = true
+                memory.status_a = false
             } else {
-                memory.value_b += String(value)
+
+                memory.status_b = true
+                memory.status_a = false
+                if (memory.value_b == 0) {
+                    memory.value_b += value
+                } else {
+                    memory.value_b += String(value)
+                }
             }
         }
     }
@@ -68,6 +77,14 @@ function controlNumbers(value) {
 function controlOperations(value) {
     if (value != 'mrc') {
         memory.status_c = false // flag para no borrar la memoria aux (memory.value_c).
+    }
+    if (controlOperations.prev_operator == '=' && value == 'mrc') {
+        memory.reset()
+        if (memory.status_c) { controlOperations(value); return }
+        send(memory.value_c)
+        controlOperations.prev_operator = '='
+        memory.status_c = true
+        return
     }
     controlOperations.prev_operator = value
 
@@ -152,6 +169,7 @@ function controlOperations(value) {
             return
 
         case 'mem_suma':
+            memory.value_a = parseFloat(memory.value_a)  // fix m+ concatenaba los numeros con coma en la memoria.
             controlOperations('=')
             memory.value_c += memory.value_a
             aux_display.show('M+ = ' + memory.value_c)
@@ -169,9 +187,9 @@ function controlOperations(value) {
                 aux_display.show('Memory Clear')
                 return
             }
-            controlOperations.prev_operator = memory.operation
             if (memory.operation != '') { // si hay una operacion entonces envio el valor de la memoria como si fuera un numero ingresado manualmente.
                 send(memory.value_c)
+                memory.status_c = true
             } else { // de lo contrario cargo el valor de memoria guardado en la memoria principal.
                 memory.value_a = memory.value_c
                 aux_display.show('Memory = ' + memory.value_c)
