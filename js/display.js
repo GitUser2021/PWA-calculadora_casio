@@ -34,6 +34,12 @@ function render() {
     if (typeof (aux_display.data_b) === 'undefined') { aux_display.data_b = '' }
     if (typeof (controlOperations.prev_number) === 'undefined') { controlOperations.prev_number = '' }
 
+    // para limitar la cant. de digitos en pantalla.
+    // lo ubico al final para que sobre-escriba el display luego de que se hayan
+    // renderizado todos los datos.
+    // solamente muestro los datos recortados por el valor de MAX_NUMBERS.
+    check_max_numbers()    
+
     if (controlOperations.prev_operator == '=') {
         display.show(memory.value_a)
         aux_display.show(aux_display.data_a + ' ' + aux_display.data_b + ' = ' + memory.value_a)
@@ -49,9 +55,4 @@ function render() {
             aux_display.show(aux_display.value)
         }
     }
-    // para limitar la cant. de digitos en pantalla.
-    // lo ubico al final para que sobre-escriba el display luego de que se hayan
-    // renderizado todos los datos.
-    // solamente muestro los datos recortados por el valor de MAX_NUMBERS.
-    check_max_numbers()
 }

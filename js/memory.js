@@ -292,11 +292,11 @@ function fix_decimal(MAX_DECIMALES) {
 // para limitar la cant. de digitos en pantalla.
 function check_max_numbers() {
     if (String(memory.value_a).length > MAX_NUMBERS) {
-        if (memory.status_a) {
-            display.show(String(memory.value_a).slice(0, MAX_NUMBERS))
-        }
-        if (memory.status_b) {
-            display.show(String(memory.value_b).slice(0, MAX_NUMBERS))
-        }
+        display.show(String(memory.value_a).slice(0, MAX_NUMBERS))
+        memory.value_a = parseFloat((String(memory.value_a).slice(0, MAX_NUMBERS)))
+    }
+    if (String(memory.value_b).length > MAX_NUMBERS) {
+        display.show(String(memory.value_b).slice(0, MAX_NUMBERS))
+        memory.value_b = parseFloat((String(memory.value_b).slice(0, MAX_NUMBERS)))
     }
 }
