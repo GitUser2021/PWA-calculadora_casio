@@ -135,14 +135,14 @@ ref_btn_mem_suma.addEventListener(event_down, () => {
     ref_btn_mem_suma.style.width = parseFloat(getComputedStyle(ref_btn_mem_suma)['width']) * down + 'px'
 }, {passive: true})
 ref_btn_mem_suma.addEventListener(event_up, () => {
-    ref_btn_suma.style.width = up
+    ref_btn_mem_suma.style.width = up
 }, {passive: true})
 
 ref_btn_mem_resta.addEventListener(event_down, () => {
     ref_btn_mem_resta.style.width = parseFloat(getComputedStyle(ref_btn_mem_resta)['width']) * down + 'px'
 }, {passive: true})
 ref_btn_mem_resta.addEventListener(event_up, () => {
-    ref_btn_resta.style.width = up
+    ref_btn_mem_resta.style.width = up
 }, {passive: true})
 
 
