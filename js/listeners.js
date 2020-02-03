@@ -29,7 +29,7 @@ for (let i = 0; i < 10; i++) {
             send(window['btn_' + i].value)
         }
         enable_operators('operators_only')
-    })
+    }, {passive: true})
 }
 
 ref_btn_dot.addEventListener(event_down, () => {
@@ -39,7 +39,7 @@ ref_btn_dot.addEventListener(event_down, () => {
     }
     enable_operators('all')
     btn_dot.status = false
-})
+}, {passive: true})
 //-----------------------------------------------------------------------------------------------------------------------
 
 
@@ -51,7 +51,7 @@ ref_btn_sumar.addEventListener(event_down, () => {
     }
     enable_operators('all')
     btn_sumar.status = false
-})
+}, {passive: true})
 
 ref_btn_restar.addEventListener(event_down, () => {
     if (btn_restar.status) { // solo se envia si su status es true.
@@ -60,7 +60,7 @@ ref_btn_restar.addEventListener(event_down, () => {
     }
     enable_operators('all')
     btn_restar.status = false
-})
+}, {passive: true})
 
 ref_btn_multiplicar.addEventListener(event_down, () => {
     if (btn_multiplicar.status) { // solo se envia si su status es true.
@@ -69,7 +69,7 @@ ref_btn_multiplicar.addEventListener(event_down, () => {
     }
     enable_operators('all')
     btn_multiplicar.status = false
-})
+}, {passive: true})
 
 ref_btn_dividir.addEventListener(event_down, () => {
     if (btn_dividir.status) { // solo se envia si su status es true.
@@ -78,7 +78,7 @@ ref_btn_dividir.addEventListener(event_down, () => {
     }
     enable_operators('all')
     btn_dividir.status = false
-})
+}, {passive: true})
 
 ref_btn_porcentaje.addEventListener(event_down, () => {
     if (btn_porcentaje.status) { // solo se envia si su status es true.
@@ -88,7 +88,7 @@ ref_btn_porcentaje.addEventListener(event_down, () => {
     }
     enable_operators('all')
     btn_porcentaje.status = false
-})
+}, {passive: true})
 
 ref_btn_igual.addEventListener(event_down, () => {
     if (btn_igual.status) {
@@ -96,7 +96,7 @@ ref_btn_igual.addEventListener(event_down, () => {
         send(btn_igual.value)
     }
     enable_operators('all')
-})
+}, {passive: true})
 
 ref_btn_raiz.addEventListener(event_down, () => {
     if (btn_raiz.status) {
@@ -104,7 +104,7 @@ ref_btn_raiz.addEventListener(event_down, () => {
         send(btn_raiz.value)
     }
     enable_operators('all')
-})
+}, {passive: true})
 //-----------------------------------------------------------------------------------------------------------------------
 
 
@@ -112,30 +112,30 @@ ref_btn_raiz.addEventListener(event_down, () => {
 ref_btn_ac.addEventListener(event_down, () => {
     power = true // enciendo la calculadora.
     send(btn_ac.value)
-})
+}, {passive: true})
 ref_btn_c.addEventListener(event_down, () => {
     power = true // enciendo la calculadora.
     send(btn_c.value)
-})
+}, {passive: true})
 ref_btn_signo.addEventListener(event_down, () => {
     send(btn_signo.value)
-})
+}, {passive: true})
 ref_btn_off.addEventListener(event_down, () => {
     send(btn_off.value)
-})
+}, {passive: true})
 ref_btn_mrc.addEventListener(event_down, () => {
     console.log('mrc')
     send(btn_mrc.value)
     enable_operators('all')
-})
+}, {passive: true})
 ref_btn_mem_suma.addEventListener(event_down, () => {
     console.log('mem suma')
     send(btn_mem_suma.value)
-})
+}, {passive: true})
 ref_btn_mem_resta.addEventListener(event_down, () => {
     console.log('mem resta')
     send(btn_mem_resta.value)
-})
+}, {passive: true})
 //-----------------------------------------------------------------------------------------------------------------------
 
 
