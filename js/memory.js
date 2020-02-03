@@ -158,12 +158,18 @@ function controlOperations(value) {
             break
 
         case 'raiz':
-            temp = memory.value_a
-            memory.value_a = Math.sqrt(memory.value_a)
-            aux_display.show(`√ ${temp} = ${memory.value_a}`)
-            display.show(memory.value_a)
-            memory.operation = '='
-            return
+            if( memory.value_b == 0 ){
+                temp = memory.value_a
+                memory.value_a = Math.sqrt(memory.value_a)
+                aux_display.show(`√ ${temp} = ${memory.value_a}`)
+                check_max_numbers()
+                memory.operation = '='
+                return
+            }else{
+                controlOperations('=')
+                controlOperations('raiz')
+                return
+            }
 
         case 'off':
             memory.reset()
@@ -301,11 +307,11 @@ function fix_decimal(MAX_DECIMALES) {
 // para limitar la cant. de digitos en pantalla.
 function check_max_numbers() {
     if (String(memory.value_a).length > MAX_NUMBERS) {
-        display.show(String(memory.value_a).slice(0, MAX_NUMBERS))
         memory.value_a = parseFloat((String(memory.value_a).slice(0, MAX_NUMBERS)))
+        display.show(memory.value_a)
     }
     if (String(memory.value_b).length > MAX_NUMBERS) {
-        display.show(String(memory.value_b).slice(0, MAX_NUMBERS))
         memory.value_b = parseFloat((String(memory.value_b).slice(0, MAX_NUMBERS)))
+        display.show(memory.value_b)
     }
 }
