@@ -73,11 +73,14 @@ function fakePress(btn_fake){
     
     if(window[btn_fake] === undefined){
         btn_fake.dispatchEvent(clickEvent);
+        clickEvent.initEvent('mouseup', true, true);
+        btn_fake.dispatchEvent(clickEvent);
+
     } else{
         window[btn_fake].dispatchEvent(clickEvent);
+        clickEvent.initEvent('mouseup', true, true);
+        window[btn_fake].dispatchEvent(clickEvent);
     }
-    
-    clickEvent.initEvent('mouseup', true, true);
 }
 //----------------------------------------------------------------------------------------------------------------------
 
