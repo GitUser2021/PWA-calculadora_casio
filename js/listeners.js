@@ -76,6 +76,8 @@ function fakePress(btn_fake){
     } else{
         window[btn_fake].dispatchEvent(clickEvent);
     }
+    
+    clickEvent.initEvent('mouseup', true, true);
 }
 //----------------------------------------------------------------------------------------------------------------------
 
