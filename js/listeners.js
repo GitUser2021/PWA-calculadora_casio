@@ -20,6 +20,23 @@ is_touch_enabled() ? event_down = 'touchstart' : event_down
 is_touch_enabled() ? event_up = 'touchend' : event_up
 //-----------------------------------------------------------------------------------------------------------------------
 
+// listeners botones fisicos // (provisorio)
+document.addEventListener('keypress', function e {
+    console.log('event: ', e.key);
+    switch(e.key){
+        case '.':
+            fakePress('ref_btn_dot');
+        break;
+    }
+});
+
+function fakePress(btn_fake){
+    let clickEvent = document.createEvent('MouseEvents');
+    clickEvent.initEvent('mousedown', true, true);
+    window[btn_fake].dispatchEvent(clickEvent);
+}
+//----------------------------------------------------------------------------------------------------------------------
+
 
 // listeners de los botones numericos y el punto.
 for (let i = 0; i < 10; i++) {
