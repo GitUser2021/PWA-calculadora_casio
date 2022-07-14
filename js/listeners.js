@@ -70,7 +70,12 @@ document.addEventListener('keypress', function (e) {
 function fakePress(btn_fake){
     let clickEvent = document.createEvent('MouseEvents');
     clickEvent.initEvent('mousedown', true, true);
-    window[btn_fake].dispatchEvent(clickEvent);
+    
+    if(window[btn_fake] === undefined){
+        btn_fake.dispatchEvent(clickEvent);
+    } else{
+        window[btn_fake].dispatchEvent(clickEvent);
+    }
 }
 //----------------------------------------------------------------------------------------------------------------------
 
