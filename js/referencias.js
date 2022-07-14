@@ -39,5 +39,6 @@ const MAX_NUMBERS = 10
 // constante maxima cantidad de decimales.
 const MAX_DECIMALES = 5
 
+const VERSION = 'V1.0';
 // status encendido/apagado.
 let power = true
