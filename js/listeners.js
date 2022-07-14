@@ -21,7 +21,7 @@ is_touch_enabled() ? event_up = 'touchend' : event_up
 //-----------------------------------------------------------------------------------------------------------------------
 
 // listeners botones fisicos // (provisorio)
-document.addEventListener('keypress', function e {
+document.addEventListener('keypress', function (e) {
     console.log('event: ', e.key);
     switch(e.key){
         case '.':
