@@ -173,7 +173,7 @@ function controlOperations(value) {
 
         case 'off':
             memory.reset()
-            aux_display.show('')
+            aux_display.show(VERSION)
             display.show('OFF')
             power = false
             return
