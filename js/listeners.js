@@ -24,8 +24,45 @@ is_touch_enabled() ? event_up = 'touchend' : event_up
 document.addEventListener('keypress', function (e) {
     console.log('event: ', e.key);
     switch(e.key){
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+            fakePress('ref_btn_' + e.key);
+        break;
+            
         case '.':
-            fakePress('ref_btn_dot');
+            fakePress(ref_btn_dot);
+        break;
+            
+        case '+':
+            fakePress(ref_btn_sumar);
+        break;
+            
+        case '-':
+            fakePress(ref_btn_restar);
+        break;
+            
+        case '/':
+            fakePress(ref_btn_dividir);
+        break;
+            
+        case '*':
+            fakePress(ref_btn_multiplicar);
+        break;
+            
+        case '%':
+            fakePress(ref_btn_porcentaje);
+        break;
+            
+        case 'Enter':
+            fakePress(ref_btn_igual);
         break;
     }
 });
