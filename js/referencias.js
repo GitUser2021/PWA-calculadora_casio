@@ -35,7 +35,7 @@ let ref_display = document.getElementById('main_display')
 let ref_aux_display = document.getElementById('aux_display')
 
 // constante maxima cantidad de numeros en pantalla.
-const MAX_NUMBERS = 9
+const MAX_NUMBERS = 10
 // constante maxima cantidad de decimales.
 const MAX_DECIMALES = 5
 
