@@ -1,7 +1,7 @@
 // importScripts('js/app.js')
 console.log('sw.js loaded') 
 
-const version = "0.0.0";
+const version = "0.0.1";
 const static_cacheName = `static-v-${version}`
 const dynamic_cacheName = `dynamic-v-${version}`
 let cachex = [
